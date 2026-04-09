@@ -1105,6 +1105,267 @@
             transform: translateY(0);
         }
 
+        .ride-recurrence-badge {
+            font-size: 11px;
+            color: var(--muted);
+            font-weight: 500;
+            margin-top: 3px;
+        }
+        .ride-action-maps {
+            background: var(--card);
+            color: var(--blue);
+            border-color: #bfdbfe;
+        }
+        .ride-action-maps:hover {
+            background: #eff6ff;
+            border-color: var(--blue);
+        }
+        .sched-preview {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 14px;
+        }
+        .sched-preview-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            margin-bottom: 10px;
+        }
+        .sched-preview-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 0;
+        }
+        .sched-preview-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%; flex-shrink: 0;
+        }
+        .sched-preview-label {
+            font-size: 12px;
+            color: var(--muted);
+            flex: 1;
+        }
+        .sched-preview-val {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        .sched-preview-note {
+            font-size: 11px;
+            color: var(--orange);
+            font-weight: 600;
+            margin-top: 8px;
+            min-height: 14px;
+        }
+
+        /* ─── RIDES TABS ─── */
+        .rides-tabs {
+            display: flex;
+            gap: 4px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 4px;
+            margin-bottom: 20px;
+            width: fit-content;
+        }
+        .rides-tab {
+            padding: 8px 22px;
+            border: none;
+            border-radius: 9px;
+            background: transparent;
+            color: var(--muted);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+        .rides-tab.active {
+            background: var(--white);
+            color: var(--dark);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        }
+        .ride-actions {
+            display: flex;
+            gap: 8px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border);
+        }
+        .ride-action-btn {
+            flex: 1;
+            padding: 8px 12px;
+            border-radius: 9px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+        .ride-action-view { background: var(--card); color: var(--slate); }
+        .ride-action-view:hover { border-color: var(--green); color: var(--green); background: rgba(34,197,94,0.06); }
+        .ride-action-cancel { background: var(--white); color: var(--red); border-color: #fecaca; }
+        .ride-action-cancel:hover { background: #fef2f2; border-color: var(--red); }
+
+        /* ─── HISTORY CARDS ─── */
+        .history-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            transition: all 0.2s;
+        }
+        .history-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .history-left { display: flex; align-items: center; gap: 12px; }
+        .history-avatar {
+            width: 42px; height: 42px; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px; flex-shrink: 0;
+            background: linear-gradient(135deg, #fbbf24, #f97316);
+        }
+        .history-name { font-weight: 700; font-size: 14px; color: var(--dark); }
+        .history-meta { font-size: 12px; color: var(--muted); margin-top: 2px; }
+        .history-badge {
+            padding: 3px 10px; border-radius: 20px; font-size: 11px;
+            font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px;
+        }
+        .history-completed { background: #f0fdf4; color: var(--green-dark); }
+        .history-cancelled { background: #fef2f2; color: #b91c1c; }
+        .history-rating { font-size: 12px; font-weight: 600; color: var(--green); cursor: pointer; text-align: right; }
+        .history-rating:hover { text-decoration: underline; }
+        .history-rating.rated { color: var(--muted); cursor: default; }
+        .history-rating.rated:hover { text-decoration: none; }
+        .history-reason { font-size: 11px; color: var(--muted); text-align: right; }
+
+        /* ─── MODALS ─── */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15,23,42,0.45);
+            z-index: 500;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            backdrop-filter: blur(2px);
+        }
+        .modal-overlay.open { display: flex; }
+        .modal-card {
+            background: var(--white);
+            border-radius: 18px;
+            padding: 24px;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: 0 24px 60px rgba(15,23,42,0.18);
+            animation: modalIn 0.22s ease;
+        }
+        @keyframes modalIn {
+            from { opacity: 0; transform: translateY(12px) scale(0.97); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .modal-title { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 800; color: var(--dark); }
+        .modal-close {
+            width: 30px; height: 30px; border-radius: 8px; border: 1px solid var(--border);
+            background: var(--card); cursor: pointer; font-size: 13px; color: var(--muted);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .modal-close:hover { background: #fef2f2; color: var(--red); border-color: #fecaca; }
+        .detail-info-row {
+            display: flex; gap: 10px; align-items: flex-start;
+            padding: 10px 0; border-bottom: 1px solid var(--border);
+        }
+        .detail-info-row:last-child { border-bottom: none; }
+        .detail-info-icon { font-size: 16px; width: 24px; flex-shrink: 0; margin-top: 1px; }
+        .detail-info-label { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.2px; }
+        .detail-info-val { font-size: 14px; font-weight: 600; color: var(--dark); margin-top: 1px; }
+
+        /* ─── STAR RATING ─── */
+        .star-rating { display: flex; gap: 6px; justify-content: center; }
+        .star { font-size: 36px; color: #d1d5db; cursor: pointer; transition: color 0.15s, transform 0.1s; user-select: none; }
+        .star:hover, .star.active { color: #facc15; }
+        .star:hover { transform: scale(1.15); }
+
+        /* ─── TOAST ─── */
+        .toast {
+            position: fixed; bottom: 28px; left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: var(--dark); color: white;
+            padding: 12px 22px; border-radius: 12px;
+            font-size: 13px; font-weight: 600;
+            opacity: 0; pointer-events: none;
+            transition: all 0.3s; z-index: 999; white-space: nowrap;
+        }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+        /* ─── RIDE TIMELINE ─── */
+        .ride-timeline {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            padding: 10px 12px;
+            background: var(--card);
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            flex-wrap: nowrap;
+            overflow-x: auto;
+        }
+
+        .ride-time-step {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .ride-time-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .ride-time-label {
+            font-size: 11px;
+            color: var(--muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2px;
+            white-space: nowrap;
+        }
+
+        .ride-time-value {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--dark);
+            white-space: nowrap;
+        }
+
+        .ride-time-note {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--muted);
+        }
+
+        .ride-time-connector {
+            flex: 1;
+            min-width: 20px;
+            height: 1px;
+            background: var(--border);
+            margin: 0 8px;
+            border-top: 2px dashed var(--border);
+        }
+
         /* ─── RESPONSIVE ─── */
         @media (max-width: 768px) {
             .container {
@@ -1146,6 +1407,269 @@
                 grid-template-columns: repeat(2, 1fr);
             }
         }
+
+        /* ─── ROLE TOGGLE ─── */
+        .role-toggle-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .role-toggle-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            padding: 12px 8px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            background: var(--card);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .role-toggle-btn:hover {
+            border-color: var(--green);
+            background: rgba(34, 197, 94, 0.05);
+        }
+
+        .role-toggle-btn.active {
+            border-color: var(--green);
+            background: rgba(34, 197, 94, 0.1);
+        }
+
+        .role-toggle-icon { font-size: 22px; }
+        .role-toggle-label { font-size: 13px; font-weight: 700; color: var(--dark); }
+        .role-toggle-sub { font-size: 11px; color: var(--muted); }
+
+        /* ─── TIME MODE TOGGLE ─── */
+        .time-mode-toggle {
+            display: flex;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .time-mode-btn {
+            flex: 1;
+            padding: 9px 6px;
+            border: none;
+            background: var(--card);
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--muted);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .time-mode-btn.active {
+            background: var(--green);
+            color: white;
+        }
+
+        /* ─── DRIVE SECTION ─── */
+        .sched-drive-section {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 12px 14px;
+            margin-bottom: 14px;
+        }
+
+        .sched-drive-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--slate);
+            margin-bottom: 2px;
+        }
+
+        .traffic-estimate-btn {
+            background: none;
+            border: 1px solid var(--green);
+            color: var(--green);
+            border-radius: 8px;
+            padding: 4px 10px;
+            font-size: 11px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .traffic-estimate-btn:hover {
+            background: rgba(34, 197, 94, 0.1);
+        }
+
+        .traffic-estimate-btn.loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .drive-leg-badge {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 9px;
+            font-weight: 700;
+            padding: 2px 5px;
+            border-radius: 4px;
+            pointer-events: none;
+        }
+
+        .drive-leg-badge.traffic-light { background: #dcfce7; color: #166534; }
+        .drive-leg-badge.traffic-moderate { background: #fef9c3; color: #854d0e; }
+        .drive-leg-badge.traffic-heavy { background: #fee2e2; color: #991b1b; }
+
+        .traffic-status {
+            font-size: 11px;
+            color: var(--muted);
+            margin-top: 8px;
+            min-height: 14px;
+        }
+
+        .sched-partner-hint {
+            font-size: 11px;
+            color: var(--muted);
+            margin-top: 5px;
+            line-height: 1.4;
+        }
+        /* ─── FRIENDS PAGE ─── */
+        .friends-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 14px;
+        }
+
+        .friend-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 16px;
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            transition: all 0.2s;
+        }
+
+        .friend-card:hover {
+            border-color: var(--green);
+            box-shadow: 0 4px 14px rgba(34,197,94,0.1);
+        }
+
+        .friend-avatar {
+            width: 52px;
+            height: 52px;
+            border-radius: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            flex-shrink: 0;
+        }
+
+        .friend-info { flex: 1; min-width: 0; }
+
+        .friend-name {
+            font-weight: 700;
+            color: var(--dark);
+            font-size: 14px;
+        }
+
+        .friend-meta {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 2px;
+        }
+
+        .friend-tags {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            margin-top: 6px;
+        }
+
+        .friend-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+
+        .friend-status {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 9px;
+            border-radius: 8px;
+            white-space: nowrap;
+        }
+
+        .friend-status-riding {
+            background: rgba(34,197,94,0.12);
+            color: var(--green-dark);
+            border: 1px solid var(--green-light);
+        }
+
+        .friend-status-connected {
+            background: #eff6ff;
+            color: #1d4ed8;
+            border: 1px solid #bfdbfe;
+        }
+
+        .friend-btn {
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .friend-btn-msg {
+            background: var(--white);
+            border: 1px solid var(--border);
+            color: var(--slate);
+        }
+
+        .friend-btn-msg:hover {
+            border-color: var(--green);
+            color: var(--green);
+        }
+
+        .friend-btn-schedule {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            border: none;
+            color: white;
+        }
+
+        .friend-btn-schedule:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(34,197,94,0.25);
+        }
+
+        .friend-request-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 14px 16px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            transition: all 0.2s;
+        }
+
+        .friend-request-card:hover {
+            border-color: var(--green);
+            box-shadow: 0 3px 10px rgba(34,197,94,0.08);
+        }
     </style>
 </head>
 <body>
@@ -1156,6 +1680,7 @@
             <div class="nav-buttons">
                 <button class="nav-btn active" onclick="showPage('dashboard')">Dashboard</button>
                 <button class="nav-btn" onclick="showPage('matches')">Find Matches</button>
+                <button class="nav-btn" onclick="showPage('friends')">Friends</button>
                 <button class="nav-btn" onclick="showPage('messages')">Messages</button>
                 <button class="nav-btn" onclick="showPage('my-rides')">My Rides</button>
             </div>
@@ -1191,16 +1716,6 @@
                         <div class="form-group">
                             <label class="form-label" for="login-password">Password</label>
                             <input id="login-password" class="form-input" type="password" placeholder="Enter password" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label" for="login-role">I am signing in as</label>
-                            <select id="login-role" class="form-select" required>
-                                <option value="">Select role</option>
-                                <option value="driver">Driver</option>
-                                <option value="rider">Rider</option>
-                                <option value="both">Both</option>
-                            </select>
                         </div>
 
                         <div class="form-row">
@@ -1247,7 +1762,7 @@
         <!-- DASHBOARD -->
         <div id="dashboard" class="page">
             <div class="greeting-section">
-                <div class="greeting">Welcome back, <span>Alex</span>! 👋</div>
+                <div class="greeting">Welcome back, <span id="greeting-name">Alex</span>! 👋</div>
                 <div class="greeting-sub">Looking good for your morning ride</div>
             </div>
 
@@ -1279,13 +1794,40 @@
                     Next Scheduled Ride
                     <a class="section-link" onclick="showPage('my-rides')">View All →</a>
                 </div>
-                <div class="ride-card">
-                    <div class="ride-avatar">👩‍🎓</div>
-                    <div class="ride-info">
-                        <div class="ride-name">Jordan Chen</div>
-                        <div class="ride-meta">Monday, 7:40 AM • Diamond Bar → Campus</div>
+                <div class="ride-card" style="flex-direction: column; align-items: stretch; gap: 12px;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div class="ride-avatar">👩‍🎓</div>
+                        <div class="ride-info" style="flex: 1;">
+                            <div class="ride-name">Jordan Chen <span style="font-weight: 400; color: var(--muted); font-size: 12px;">· Driver</span></div>
+                            <div class="ride-meta">Monday · Diamond Bar → Cal Poly Pomona</div>
+                        </div>
+                        <div class="ride-badge">Confirmed</div>
                     </div>
-                    <div class="ride-badge">Confirmed</div>
+                    <div class="ride-timeline">
+                        <div class="ride-time-step">
+                            <div class="ride-time-dot" style="background: var(--blue);"></div>
+                            <div>
+                                <div class="ride-time-label">Depart from Home</div>
+                                <div class="ride-time-value">7:20 AM</div>
+                            </div>
+                        </div>
+                        <div class="ride-time-connector"></div>
+                        <div class="ride-time-step">
+                            <div class="ride-time-dot" style="background: var(--orange);"></div>
+                            <div>
+                                <div class="ride-time-label">Pickup · Starbucks, Diamond Bar Blvd</div>
+                                <div class="ride-time-value">7:40 AM</div>
+                            </div>
+                        </div>
+                        <div class="ride-time-connector"></div>
+                        <div class="ride-time-step">
+                            <div class="ride-time-dot" style="background: var(--green);"></div>
+                            <div>
+                                <div class="ride-time-label">Est. Arrival · Campus (Lot H)</div>
+                                <div class="ride-time-value">8:10 AM <span class="ride-time-note">~30 min drive</span></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -1532,6 +2074,235 @@
             </div>
         </div>
 
+        <!-- FRIENDS -->
+        <div id="friends" class="page">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
+                <h2 style="font-family:'Poppins',sans-serif;font-size:28px;font-weight:800;color:var(--dark);margin:0;">Friends</h2>
+                <button class="btn btn-primary" style="padding:10px 18px;font-size:13px;margin:0;" onclick="openAddFriendModal()">+ Add Friend</button>
+            </div>
+
+            <!-- Tabs -->
+            <div class="rides-tabs" style="margin-bottom:20px;">
+                <button class="rides-tab active" id="friends-tab-all"    onclick="switchFriendsTab('all',this)">All Friends</button>
+                <button class="rides-tab"         id="friends-tab-riding" onclick="switchFriendsTab('riding',this)">Riding Together</button>
+                <button class="rides-tab"         id="friends-tab-pending" onclick="switchFriendsTab('pending',this)">Requests <span class="unread-badge" style="position:static;display:inline-flex;margin-left:4px;">2</span></button>
+            </div>
+
+            <!-- ALL FRIENDS -->
+            <div id="friends-panel-all">
+                <div class="friends-grid">
+
+                    <div class="friend-card">
+                        <div class="friend-avatar" style="background:linear-gradient(135deg,#fbbf24,#f97316);">👩‍🎓</div>
+                        <div class="friend-info">
+                            <div class="friend-name">Jordan Chen</div>
+                            <div class="friend-meta">Computer Science · Junior</div>
+                            <div class="friend-tags">
+                                <span class="tag">Diamond Bar</span>
+                                <span class="tag">Driver</span>
+                                <span class="tag">4.8 ⭐</span>
+                            </div>
+                        </div>
+                        <div class="friend-actions">
+                            <div class="friend-status friend-status-riding">🚗 Riding together</div>
+                            <div style="display:flex;gap:6px;margin-top:8px;">
+                                <button class="friend-btn friend-btn-msg" onclick="showPage('messages')">Message</button>
+                                <button class="friend-btn friend-btn-schedule" onclick="openScheduleModal()">Schedule</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="friend-card">
+                        <div class="friend-avatar" style="background:linear-gradient(135deg,#3b82f6,#6366f1);">👨‍💼</div>
+                        <div class="friend-info">
+                            <div class="friend-name">Marcus Johnson</div>
+                            <div class="friend-meta">Engineering · Senior</div>
+                            <div class="friend-tags">
+                                <span class="tag">Walnut</span>
+                                <span class="tag">Driver</span>
+                                <span class="tag">4.6 ⭐</span>
+                            </div>
+                        </div>
+                        <div class="friend-actions">
+                            <div class="friend-status friend-status-riding">🚗 Riding together</div>
+                            <div style="display:flex;gap:6px;margin-top:8px;">
+                                <button class="friend-btn friend-btn-msg" onclick="showPage('messages')">Message</button>
+                                <button class="friend-btn friend-btn-schedule" onclick="openScheduleModal()">Schedule</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="friend-card">
+                        <div class="friend-avatar" style="background:linear-gradient(135deg,#ec4899,#8b5cf6);">👩‍🰳</div>
+                        <div class="friend-info">
+                            <div class="friend-name">Sophia Rodriguez</div>
+                            <div class="friend-meta">Business · Sophomore</div>
+                            <div class="friend-tags">
+                                <span class="tag">Chino</span>
+                                <span class="tag">Rider</span>
+                                <span class="tag">4.7 ⭐</span>
+                            </div>
+                        </div>
+                        <div class="friend-actions">
+                            <div class="friend-status friend-status-riding">🚗 Riding together</div>
+                            <div style="display:flex;gap:6px;margin-top:8px;">
+                                <button class="friend-btn friend-btn-msg" onclick="showPage('messages')">Message</button>
+                                <button class="friend-btn friend-btn-schedule" onclick="openScheduleModal()">Schedule</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="friend-card">
+                        <div class="friend-avatar" style="background:linear-gradient(135deg,#22c55e,#16a34a);">👨‍💻</div>
+                        <div class="friend-info">
+                            <div class="friend-name">David Park</div>
+                            <div class="friend-meta">Data Science · Junior</div>
+                            <div class="friend-tags">
+                                <span class="tag">Diamond Bar</span>
+                                <span class="tag">Driver</span>
+                                <span class="tag">4.5 ⭐</span>
+                            </div>
+                        </div>
+                        <div class="friend-actions">
+                            <div class="friend-status friend-status-connected">✓ Connected</div>
+                            <div style="display:flex;gap:6px;margin-top:8px;">
+                                <button class="friend-btn friend-btn-msg" onclick="showPage('messages')">Message</button>
+                                <button class="friend-btn friend-btn-schedule" onclick="openScheduleModal()">Schedule</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="friend-card">
+                        <div class="friend-avatar" style="background:linear-gradient(135deg,#f43f5e,#ec4899);">👩‍🎨</div>
+                        <div class="friend-info">
+                            <div class="friend-name">Emily Zhang</div>
+                            <div class="friend-meta">Art History · Freshman</div>
+                            <div class="friend-tags">
+                                <span class="tag">Ontario</span>
+                                <span class="tag">Rider</span>
+                                <span class="tag">4.9 ⭐</span>
+                            </div>
+                        </div>
+                        <div class="friend-actions">
+                            <div class="friend-status friend-status-connected">✓ Connected</div>
+                            <div style="display:flex;gap:6px;margin-top:8px;">
+                                <button class="friend-btn friend-btn-msg">Message</button>
+                                <button class="friend-btn friend-btn-schedule" onclick="openScheduleModal()">Schedule</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- RIDING TOGETHER -->
+            <div id="friends-panel-riding" style="display:none;">
+                <p style="color:var(--muted);font-size:13px;margin-bottom:16px;">Friends you have active or upcoming rides scheduled with.</p>
+                <div class="friends-grid">
+
+                    <div class="friend-card">
+                        <div class="friend-avatar" style="background:linear-gradient(135deg,#fbbf24,#f97316);">👩‍🎓</div>
+                        <div class="friend-info">
+                            <div class="friend-name">Jordan Chen</div>
+                            <div class="friend-meta">Next ride: Mon Apr 14 · 7:40 AM</div>
+                            <div class="friend-tags"><span class="tag">MWF</span><span class="tag">Diamond Bar → Campus</span></div>
+                        </div>
+                        <div class="friend-actions">
+                            <button class="friend-btn friend-btn-schedule" onclick="showPage('my-rides')">View Ride</button>
+                        </div>
+                    </div>
+
+                    <div class="friend-card">
+                        <div class="friend-avatar" style="background:linear-gradient(135deg,#3b82f6,#6366f1);">👨‍💼</div>
+                        <div class="friend-info">
+                            <div class="friend-name">Marcus Johnson</div>
+                            <div class="friend-meta">Next ride: Wed Apr 16 · 8:00 AM</div>
+                            <div class="friend-tags"><span class="tag">Wednesdays</span><span class="tag">Walnut → Campus</span></div>
+                        </div>
+                        <div class="friend-actions">
+                            <button class="friend-btn friend-btn-schedule" onclick="showPage('my-rides')">View Ride</button>
+                        </div>
+                    </div>
+
+                    <div class="friend-card">
+                        <div class="friend-avatar" style="background:linear-gradient(135deg,#ec4899,#8b5cf6);">👩‍🰳</div>
+                        <div class="friend-info">
+                            <div class="friend-name">Sophia Rodriguez</div>
+                            <div class="friend-meta">Next ride: Fri Apr 18 · 7:05 AM</div>
+                            <div class="friend-tags"><span class="tag">Fridays</span><span class="tag">Your Home → Chino → Campus</span></div>
+                        </div>
+                        <div class="friend-actions">
+                            <button class="friend-btn friend-btn-schedule" onclick="showPage('my-rides')">View Ride</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- PENDING REQUESTS -->
+            <div id="friends-panel-pending" style="display:none;">
+                <p style="color:var(--muted);font-size:13px;margin-bottom:16px;">People who want to connect with you as a carpool friend.</p>
+                <div style="display:flex;flex-direction:column;gap:12px;">
+
+                    <div class="friend-request-card">
+                        <div class="friend-avatar" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed);width:48px;height:48px;font-size:22px;flex-shrink:0;">👨‍🏥</div>
+                        <div style="flex:1;">
+                            <div class="friend-name">James Wilson</div>
+                            <div class="friend-meta">Pre-Med · Sophomore · Fontana</div>
+                            <div style="font-size:12px;color:var(--muted);margin-top:4px;">"Hey! I saw we have similar schedules on MWF. Would love to carpool!"</div>
+                        </div>
+                        <div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0;">
+                            <button class="btn btn-primary" style="padding:7px 14px;font-size:12px;margin:0;" onclick="acceptFriendRequest(this)">Accept</button>
+                            <button class="btn btn-secondary" style="padding:7px 14px;font-size:12px;" onclick="declineFriendRequest(this)">Decline</button>
+                        </div>
+                    </div>
+
+                    <div class="friend-request-card">
+                        <div class="friend-avatar" style="background:linear-gradient(135deg,#f97316,#eab308);width:48px;height:48px;font-size:22px;flex-shrink:0;">👩‍🔬</div>
+                        <div style="flex:1;">
+                            <div class="friend-name">Aisha Patel</div>
+                            <div class="friend-meta">Chemistry · Junior · Rancho Cucamonga</div>
+                            <div style="font-size:12px;color:var(--muted);margin-top:4px;">"I commute from Rancho and pass through your area. Interested in carpooling?"</div>
+                        </div>
+                        <div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0;">
+                            <button class="btn btn-primary" style="padding:7px 14px;font-size:12px;margin:0;" onclick="acceptFriendRequest(this)">Accept</button>
+                            <button class="btn btn-secondary" style="padding:7px 14px;font-size:12px;" onclick="declineFriendRequest(this)">Decline</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- ADD FRIEND MODAL -->
+        <div id="add-friend-modal" class="modal-overlay" onclick="closeModalOnOverlay(event,'add-friend-modal')">
+            <div class="modal-card">
+                <div class="modal-header">
+                    <div class="modal-title">Add a Friend</div>
+                    <button class="modal-close" onclick="closeModal('add-friend-modal')">✕</button>
+                </div>
+                <p style="color:var(--muted);font-size:13px;margin-bottom:16px;">Search by name or @cpp.edu email to send a friend request.</p>
+                <div class="form-group">
+                    <label class="form-label">Name or Email</label>
+                    <input type="text" class="form-input" id="add-friend-input" placeholder="e.g. Jordan Chen or jchen@cpp.edu">
+                </div>
+                <div id="add-friend-result" style="display:none;" class="sched-preview" style="margin-top:8px;">
+                    <div style="display:flex;align-items:center;gap:12px;">
+                        <div style="width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#8b5cf6,#7c3aed);display:flex;align-items:center;justify-content:center;font-size:20px;">👤</div>
+                        <div style="flex:1;">
+                            <div style="font-weight:700;color:var(--dark);font-size:14px;" id="add-friend-found-name">—</div>
+                            <div style="font-size:12px;color:var(--muted);" id="add-friend-found-meta">—</div>
+                        </div>
+                        <button class="btn btn-primary" style="padding:7px 14px;font-size:12px;margin:0;" onclick="sendFriendRequest()">Send Request</button>
+                    </div>
+                </div>
+                <div style="display:flex;gap:10px;margin-top:16px;">
+                    <button class="btn btn-secondary" style="flex:1;padding:10px;" onclick="closeModal('add-friend-modal')">Cancel</button>
+                    <button class="btn btn-primary" style="flex:1;padding:10px;margin:0;" onclick="searchFriend()">Search</button>
+                </div>
+            </div>
+        </div>
+
         <!-- MESSAGES -->
         <div id="messages" class="page">
             <h2 style="font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 800; color: var(--dark); margin-bottom: 24px;">Messages</h2>
@@ -1618,40 +2389,421 @@
 
         <!-- MY RIDES -->
         <div id="my-rides" class="page">
-            <h2 style="font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 800; color: var(--dark); margin-bottom: 24px;">My Carpools</h2>
-            
-            <div style="display: flex; flex-direction: column; gap: 12px;">
-                <div class="ride-card" style="margin: 0;">
-                    <div class="ride-avatar">👩‍🎓</div>
-                    <div class="ride-info" style="flex: 1;">
-                        <div class="ride-name">Jordan Chen</div>
-                        <div class="ride-meta">Monday • 7:40 AM - 5:00 PM</div>
-                        <div style="margin-top: 8px; font-size: 12px; color: var(--muted);">📍 Pickup: Starbucks on Diamond Bar Blvd</div>
-                    </div>
-                    <div class="ride-badge">Confirmed</div>
-                </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                <h2 style="font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 800; color: var(--dark); margin: 0;">My Carpools</h2>
+                <button class="btn btn-primary" style="padding: 10px 18px; font-size: 13px; margin: 0;" onclick="openScheduleModal()">+ Schedule Ride</button>
+            </div>
 
-                <div class="ride-card" style="margin: 0;">
-                    <div class="ride-avatar">👨‍💼</div>
-                    <div class="ride-info" style="flex: 1;">
-                        <div class="ride-name">Marcus Johnson</div>
-                        <div class="ride-meta">Wednesday • 8:00 AM - 4:30 PM</div>
-                        <div style="margin-top: 8px; font-size: 12px; color: var(--muted);">📍 Pickup: Campus West Parking Lot</div>
-                    </div>
-                    <div class="ride-badge" style="background: #fef3c7; color: #b45309;">Pending</div>
-                </div>
+            <!-- Tabs -->
+            <div class="rides-tabs">
+                <button class="rides-tab active" onclick="switchRidesTab('upcoming', this)">Upcoming</button>
+                <button class="rides-tab" onclick="switchRidesTab('history', this)">History</button>
+            </div>
 
-                <div class="ride-card" style="margin: 0;">
-                    <div class="ride-avatar">👩‍🰳</div>
-                    <div class="ride-info" style="flex: 1;">
-                        <div class="ride-name">Sophia Rodriguez (Rider)</div>
-                        <div class="ride-meta">Friday • 7:30 AM - 3:00 PM</div>
-                        <div style="margin-top: 8px; font-size: 12px; color: var(--muted);">📍 Pickup: Your Home • Pickup Time: 7:25 AM</div>
+            <!-- UPCOMING TAB -->
+            <div id="rides-upcoming" class="rides-tab-panel">
+                <div style="display: flex; flex-direction: column; gap: 16px;" id="upcoming-rides-list">
+
+                    <div class="ride-card" style="margin: 0; flex-direction: column; align-items: stretch; gap: 12px;" data-ride-id="1">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <div class="ride-avatar">👩‍🎓</div>
+                            <div class="ride-info" style="flex: 1;">
+                                <div class="ride-name">Jordan Chen <span style="font-weight: 400; color: var(--muted); font-size: 12px;">· Driver</span></div>
+                                <div class="ride-meta">Mon Apr 14 · Diamond Bar → Cal Poly Pomona</div>
+                                <div class="ride-recurrence-badge">🔁 Repeats Mon / Wed / Fri</div>
+                            </div>
+                            <div class="ride-badge">Confirmed</div>
+                        </div>
+                        <div class="ride-timeline">
+                            <div class="ride-time-step">
+                                <div class="ride-time-dot" style="background: var(--blue);"></div>
+                                <div><div class="ride-time-label">Depart from Home</div><div class="ride-time-value">7:20 AM</div></div>
+                            </div>
+                            <div class="ride-time-connector"></div>
+                            <div class="ride-time-step">
+                                <div class="ride-time-dot" style="background: var(--orange);"></div>
+                                <div><div class="ride-time-label">Pickup · Starbucks, Diamond Bar Blvd</div><div class="ride-time-value">7:40 AM</div></div>
+                            </div>
+                            <div class="ride-time-connector"></div>
+                            <div class="ride-time-step">
+                                <div class="ride-time-dot" style="background: var(--green);"></div>
+                                <div><div class="ride-time-label">Est. Arrival · Campus (Lot H)</div><div class="ride-time-value">8:10 AM <span class="ride-time-note">~30 min</span></div></div>
+                            </div>
+                        </div>
+                        <div class="ride-actions">
+                            <button class="ride-action-btn ride-action-view" onclick="openRideDetail(1)">View Details</button>
+                            <button class="ride-action-btn ride-action-maps" onclick="openMaps(1)">🗺 Open in Maps</button>
+                            <button class="ride-action-btn ride-action-cancel" onclick="openCancelModal(1)">Cancel</button>
+                        </div>
                     </div>
-                    <div class="ride-badge">Active</div>
+
+                    <div class="ride-card" style="margin: 0; flex-direction: column; align-items: stretch; gap: 12px;" data-ride-id="2">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <div class="ride-avatar" style="background: linear-gradient(135deg, #3b82f6, #6366f1);">👨‍💼</div>
+                            <div class="ride-info" style="flex: 1;">
+                                <div class="ride-name">Marcus Johnson <span style="font-weight: 400; color: var(--muted); font-size: 12px;">· Driver</span></div>
+                                <div class="ride-meta">Wed Apr 16 · Walnut → Cal Poly Pomona</div>
+                                <div class="ride-recurrence-badge">🔁 Repeats Wednesdays</div>
+                            </div>
+                            <div class="ride-badge" style="background: #fef3c7; color: #b45309;">Pending</div>
+                        </div>
+                        <div class="ride-timeline">
+                            <div class="ride-time-step">
+                                <div class="ride-time-dot" style="background: var(--blue);"></div>
+                                <div><div class="ride-time-label">Depart from Home</div><div class="ride-time-value">7:45 AM</div></div>
+                            </div>
+                            <div class="ride-time-connector"></div>
+                            <div class="ride-time-step">
+                                <div class="ride-time-dot" style="background: var(--orange);"></div>
+                                <div><div class="ride-time-label">Pickup · Grand Ave &amp; Nogales St</div><div class="ride-time-value">8:00 AM</div></div>
+                            </div>
+                            <div class="ride-time-connector"></div>
+                            <div class="ride-time-step">
+                                <div class="ride-time-dot" style="background: var(--green);"></div>
+                                <div><div class="ride-time-label">Est. Arrival · Campus (Lot B)</div><div class="ride-time-value">8:22 AM <span class="ride-time-note">~22 min</span></div></div>
+                            </div>
+                        </div>
+                        <div class="ride-actions">
+                            <button class="ride-action-btn ride-action-view" onclick="openRideDetail(2)">View Details</button>
+                            <button class="ride-action-btn ride-action-maps" onclick="openMaps(2)">🗺 Open in Maps</button>
+                            <button class="ride-action-btn ride-action-cancel" onclick="openCancelModal(2)">Cancel</button>
+                        </div>
+                    </div>
+
+                    <div class="ride-card" style="margin: 0; flex-direction: column; align-items: stretch; gap: 12px;" data-ride-id="3">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <div class="ride-avatar" style="background: linear-gradient(135deg, #ec4899, #8b5cf6);">👩‍🰳</div>
+                            <div class="ride-info" style="flex: 1;">
+                                <div class="ride-name">Sophia Rodriguez <span style="font-weight: 400; color: var(--muted); font-size: 12px;">· Rider (you're driving)</span></div>
+                                <div class="ride-meta">Fri Apr 18 · Your Home → Chino → Cal Poly Pomona</div>
+                                <div class="ride-recurrence-badge">🔁 Repeats Fridays</div>
+                            </div>
+                            <div class="ride-badge">Active</div>
+                        </div>
+                        <div class="ride-timeline">
+                            <div class="ride-time-step">
+                                <div class="ride-time-dot" style="background: var(--blue);"></div>
+                                <div><div class="ride-time-label">Depart from Your Home</div><div class="ride-time-value">7:05 AM</div></div>
+                            </div>
+                            <div class="ride-time-connector"></div>
+                            <div class="ride-time-step">
+                                <div class="ride-time-dot" style="background: var(--orange);"></div>
+                                <div><div class="ride-time-label">Pickup · Sophia's Home, Chino</div><div class="ride-time-value">7:25 AM</div></div>
+                            </div>
+                            <div class="ride-time-connector"></div>
+                            <div class="ride-time-step">
+                                <div class="ride-time-dot" style="background: var(--green);"></div>
+                                <div><div class="ride-time-label">Est. Arrival · Campus (Lot G)</div><div class="ride-time-value">8:05 AM <span class="ride-time-note">~40 min</span></div></div>
+                            </div>
+                        </div>
+                        <div class="ride-actions">
+                            <button class="ride-action-btn ride-action-view" onclick="openRideDetail(3)">View Details</button>
+                            <button class="ride-action-btn ride-action-maps" onclick="openMaps(3)">🗺 Open in Maps</button>
+                            <button class="ride-action-btn ride-action-cancel" onclick="openCancelModal(3)">Cancel</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- HISTORY TAB -->
+            <div id="rides-history" class="rides-tab-panel" style="display:none;">
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+
+                    <div class="history-card">
+                        <div class="history-left">
+                            <div class="history-avatar">👩‍🎓</div>
+                            <div>
+                                <div class="history-name">Jordan Chen</div>
+                                <div class="history-meta">Mon Apr 7 · 7:40 AM · Diamond Bar → Campus</div>
+                            </div>
+                        </div>
+                        <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 6px;">
+                            <span class="history-badge history-completed">Completed</span>
+                            <div class="history-rating" onclick="openRatingModal('Jordan Chen', 1)">⭐ Rate</div>
+                        </div>
+                    </div>
+
+                    <div class="history-card">
+                        <div class="history-left">
+                            <div class="history-avatar" style="background: linear-gradient(135deg, #ec4899, #8b5cf6);">👩‍🰳</div>
+                            <div>
+                                <div class="history-name">Sophia Rodriguez <span style="font-size: 11px; color: var(--muted);">(You drove)</span></div>
+                                <div class="history-meta">Fri Apr 4 · 7:05 AM · Your Home → Chino → Campus</div>
+                            </div>
+                        </div>
+                        <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 6px;">
+                            <span class="history-badge history-completed">Completed</span>
+                            <div class="history-rating rated">⭐ 4.8 Given</div>
+                        </div>
+                    </div>
+
+                    <div class="history-card">
+                        <div class="history-left">
+                            <div class="history-avatar" style="background: linear-gradient(135deg, #3b82f6, #6366f1);">👨‍💼</div>
+                            <div>
+                                <div class="history-name">Marcus Johnson</div>
+                                <div class="history-meta">Wed Apr 2 · 8:00 AM · Walnut → Campus</div>
+                            </div>
+                        </div>
+                        <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 6px;">
+                            <span class="history-badge history-cancelled">Cancelled</span>
+                            <div class="history-reason">Weather conditions</div>
+                        </div>
+                    </div>
+
+                    <div class="history-card">
+                        <div class="history-left">
+                            <div class="history-avatar">👩‍🎓</div>
+                            <div>
+                                <div class="history-name">Jordan Chen</div>
+                                <div class="history-meta">Mon Mar 31 · 7:40 AM · Diamond Bar → Campus</div>
+                            </div>
+                        </div>
+                        <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 6px;">
+                            <span class="history-badge history-completed">Completed</span>
+                            <div class="history-rating rated">⭐ 5.0 Given</div>
+                        </div>
+                    </div>
+
+                    <div class="history-card">
+                        <div class="history-left">
+                            <div class="history-avatar" style="background: linear-gradient(135deg, #ec4899, #8b5cf6);">👩‍🰳</div>
+                            <div>
+                                <div class="history-name">Sophia Rodriguez <span style="font-size: 11px; color: var(--muted);">(You drove)</span></div>
+                                <div class="history-meta">Fri Mar 28 · 7:05 AM · Your Home → Chino → Campus</div>
+                            </div>
+                        </div>
+                        <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 6px;">
+                            <span class="history-badge history-completed">Completed</span>
+                            <div class="history-rating rated">⭐ 4.9 Given</div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
+
+        <!-- RIDE DETAIL MODAL -->
+        <div id="ride-detail-modal" class="modal-overlay" onclick="closeModalOnOverlay(event, 'ride-detail-modal')">
+            <div class="modal-card">
+                <div class="modal-header">
+                    <div class="modal-title" id="detail-modal-title">Ride Details</div>
+                    <button class="modal-close" onclick="closeModal('ride-detail-modal')">✕</button>
+                </div>
+                <div id="detail-modal-body"></div>
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button class="btn btn-secondary" style="flex:1; padding:10px;" onclick="closeModal('ride-detail-modal')">Close</button>
+                    <button class="btn btn-primary" style="flex:1; padding:10px; margin:0;" onclick="closeModal('ride-detail-modal'); showPage('messages')">Message Driver</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- CANCEL MODAL -->
+        <div id="cancel-modal" class="modal-overlay" onclick="closeModalOnOverlay(event, 'cancel-modal')">
+            <div class="modal-card">
+                <div class="modal-header">
+                    <div class="modal-title">Cancel Ride</div>
+                    <button class="modal-close" onclick="closeModal('cancel-modal')">✕</button>
+                </div>
+                <p style="color: var(--muted); font-size: 14px; margin-bottom: 16px;">Please let your carpool partner know why you're cancelling.</p>
+                <div class="form-group">
+                    <label class="form-label">Reason for cancellation</label>
+                    <select id="cancel-reason" class="form-select">
+                        <option value="">Select a reason</option>
+                        <option value="sick">Feeling sick</option>
+                        <option value="weather">Weather conditions</option>
+                        <option value="schedule">Schedule change</option>
+                        <option value="emergency">Personal emergency</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Additional note (optional)</label>
+                    <textarea class="form-input" id="cancel-note" rows="3" placeholder="Let them know anything helpful..." style="resize: none;"></textarea>
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: 4px;">
+                    <button class="btn btn-secondary" style="flex:1; padding:10px;" onclick="closeModal('cancel-modal')">Go Back</button>
+                    <button class="btn" style="flex:1; padding:10px; background: var(--red); color: white; border: none; border-radius: 12px; font-weight: 600; cursor: pointer;" onclick="confirmCancel()">Confirm Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCHEDULE MODAL -->
+        <div id="schedule-modal" class="modal-overlay" onclick="closeModalOnOverlay(event, 'schedule-modal')">
+            <div class="modal-card" style="max-height: 90vh; overflow-y: auto;">
+                <div class="modal-header">
+                    <div class="modal-title">Schedule a Ride</div>
+                    <button class="modal-close" onclick="closeModal('schedule-modal')">✕</button>
+                </div>
+                <p style="color: var(--muted); font-size: 13px; margin-bottom: 16px;">Request a one-time or recurring ride with a matched carpool partner.</p>
+
+                <!-- ROLE SELECTION -->
+                <div class="form-group">
+                    <label class="form-label">My Role for This Ride</label>
+                    <div class="role-toggle-group">
+                        <button type="button" class="role-toggle-btn active" id="role-btn-rider" onclick="setSchedRole('rider')">
+                            <span class="role-toggle-icon">🎒</span>
+                            <span class="role-toggle-label">Rider</span>
+                            <span class="role-toggle-sub">I need a driver</span>
+                        </button>
+                        <button type="button" class="role-toggle-btn" id="role-btn-driver" onclick="setSchedRole('driver')">
+                            <span class="role-toggle-icon">🚗</span>
+                            <span class="role-toggle-label">Driver</span>
+                            <span class="role-toggle-sub">I'll drive someone</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- PARTNER SELECTION (changes based on role) -->
+                <div class="form-group">
+                    <label class="form-label" id="sched-partner-label">Select a Driver (along whose route you fall)</label>
+                    <select class="form-select" id="sched-partner">
+                        <option value="">Choose a match…</option>
+                    </select>
+                    <div class="sched-partner-hint" id="sched-partner-hint"></div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                    <div class="form-group">
+                        <label class="form-label">Date</label>
+                        <input type="date" class="form-input" id="sched-date">
+                    </div>
+                    <div class="form-group" style="margin-bottom:0;">
+                        <!-- Time mode toggle -->
+                        <label class="form-label">Schedule By</label>
+                        <div class="time-mode-toggle">
+                            <button type="button" class="time-mode-btn active" id="tmode-arrival" onclick="setTimeMode('arrival')">Arrival Time</button>
+                            <button type="button" class="time-mode-btn" id="tmode-departure" onclick="setTimeMode('departure')">Departure Time</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Arrival mode -->
+                <div id="time-input-arrival" class="form-group" style="margin-top:12px;">
+                    <label class="form-label">Desired Arrival By</label>
+                    <input type="time" class="form-input" id="sched-arrival" value="08:00" oninput="recalcTimes()">
+                </div>
+
+                <!-- Departure mode -->
+                <div id="time-input-departure" class="form-group" style="display:none; margin-top:12px;">
+                    <label class="form-label">Desired Departure Time</label>
+                    <input type="time" class="form-input" id="sched-departure" value="07:20" oninput="recalcTimes()">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Pickup Location</label>
+                    <input type="text" class="form-input" id="sched-pickup" placeholder="e.g. Starbucks on Diamond Bar Blvd" oninput="recalcTimes()">
+                </div>
+
+                <!-- Split drive times -->
+                <div class="sched-drive-section">
+                    <div class="sched-drive-header">
+                        <span>🕒 Drive Time Estimates</span>
+                        <button type="button" class="traffic-estimate-btn" onclick="estimateTrafficTimes()" id="traffic-btn">
+                            🔄 Auto-estimate from traffic
+                        </button>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px;">
+                        <div class="form-group" style="margin-bottom:0;">
+                            <label class="form-label">Home → Pickup (min)</label>
+                            <div style="position:relative;">
+                                <input type="number" class="form-input" id="sched-leg1-mins" min="1" max="60" value="15" oninput="recalcTimes()" placeholder="e.g. 15">
+                                <span class="drive-leg-badge" id="leg1-traffic-badge"></span>
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-bottom:0;">
+                            <label class="form-label">Pickup → Campus (min)</label>
+                            <div style="position:relative;">
+                                <input type="number" class="form-input" id="sched-leg2-mins" min="1" max="90" value="20" oninput="recalcTimes()" placeholder="e.g. 20">
+                                <span class="drive-leg-badge" id="leg2-traffic-badge"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="traffic-status" id="traffic-status"></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Buffer Time</label>
+                    <select class="form-select" id="sched-buffer" onchange="recalcTimes()">
+                        <option value="5">+5 min (light buffer)</option>
+                        <option value="10" selected>+10 min (recommended)</option>
+                        <option value="15">+15 min (extra caution)</option>
+                        <option value="20">+20 min (heavy traffic area)</option>
+                    </select>
+                </div>
+
+                <!-- Calculated time preview -->
+                <div id="sched-time-preview" class="sched-preview">
+                    <div class="sched-preview-title">⏱ Calculated Schedule</div>
+                    <div class="sched-preview-row">
+                        <span class="sched-preview-dot" style="background:var(--blue)"></span>
+                        <span class="sched-preview-label">Depart from Home</span>
+                        <span class="sched-preview-val" id="calc-depart">—</span>
+                    </div>
+                    <div class="sched-preview-row">
+                        <span class="sched-preview-dot" style="background:var(--orange)"></span>
+                        <span class="sched-preview-label">Pickup</span>
+                        <span class="sched-preview-val" id="calc-pickup">—</span>
+                    </div>
+                    <div class="sched-preview-row">
+                        <span class="sched-preview-dot" style="background:var(--green)"></span>
+                        <span class="sched-preview-label" id="preview-arrival-label">Est. Arrival at Campus</span>
+                        <span class="sched-preview-val" id="calc-arrival">—</span>
+                    </div>
+                    <div class="sched-preview-note" id="calc-note"></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Repeat</label>
+                    <select class="form-select" id="sched-repeat">
+                        <option value="once">One-time ride</option>
+                        <option value="mwf">Every Mon / Wed / Fri</option>
+                        <option value="mw">Every Mon / Wed</option>
+                        <option value="fri">Every Friday</option>
+                        <option value="tth">Every Tue / Thu</option>
+                        <option value="daily">Every weekday</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" id="sched-note-label">Note to driver (optional)</label>
+                    <textarea class="form-input" id="sched-note" rows="2" placeholder="Any details they should know..." style="resize: none;"></textarea>
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: 4px;">
+                    <button class="btn btn-secondary" style="flex:1; padding:10px;" onclick="closeModal('schedule-modal')">Cancel</button>
+                    <button class="btn btn-primary" style="flex:1; padding:10px; margin:0;" onclick="confirmSchedule()">Send Request</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- RATING MODAL -->
+        <div id="rating-modal" class="modal-overlay" onclick="closeModalOnOverlay(event, 'rating-modal')">
+            <div class="modal-card">
+                <div class="modal-header">
+                    <div class="modal-title">Rate Your Ride</div>
+                    <button class="modal-close" onclick="closeModal('rating-modal')">✕</button>
+                </div>
+                <p style="color: var(--muted); font-size: 13px; margin-bottom: 16px;">How was your ride with <strong id="rating-person-name"></strong>?</p>
+                <div class="star-rating" id="star-rating-input">
+                    <span class="star" data-val="1" onclick="setRating(1)">★</span>
+                    <span class="star" data-val="2" onclick="setRating(2)">★</span>
+                    <span class="star" data-val="3" onclick="setRating(3)">★</span>
+                    <span class="star" data-val="4" onclick="setRating(4)">★</span>
+                    <span class="star" data-val="5" onclick="setRating(5)">★</span>
+                </div>
+                <div class="form-group" style="margin-top: 16px;">
+                    <label class="form-label">Leave a comment (optional)</label>
+                    <textarea class="form-input" id="rating-comment" rows="3" placeholder="Great driver, very punctual..." style="resize: none;"></textarea>
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: 4px;">
+                    <button class="btn btn-secondary" style="flex:1; padding:10px;" onclick="closeModal('rating-modal')">Skip</button>
+                    <button class="btn btn-primary" style="flex:1; padding:10px; margin:0;" onclick="submitRating()">Submit Rating</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- TOAST NOTIFICATION -->
+        <div id="toast" class="toast"></div>
     </div>
 
     <script>
@@ -1749,10 +2901,9 @@
             const name = document.getElementById('login-name').value.trim();
             const email = document.getElementById('login-email').value.trim();
             const password = document.getElementById('login-password').value;
-            const role = document.getElementById('login-role').value;
             const remember = document.getElementById('remember-me').checked;
 
-            if (!name || !email || !password || !role) {
+            if (!name || !email || !password) {
                 showLoginError('Please complete all fields.');
                 return;
             }
@@ -1769,6 +2920,7 @@
 
             isLoggedIn = true;
             document.getElementById('user-avatar').textContent = getInitials(name) || 'CR';
+            document.getElementById('greeting-name').textContent = name.split(' ')[0];
 
             if (remember) {
                 localStorage.setItem('campusRideUserName', name);
@@ -2025,6 +3177,463 @@
 
         function goBack() {
             showPage('dashboard');
+        }
+
+        /* ─── MY RIDES ─── */
+        const rideDetails = {
+            1: {
+                name: 'Jordan Chen', avatar: '👩‍🎓', role: 'Driver',
+                days: 'Mon, Wed, Fri', route: 'Diamond Bar → Cal Poly Pomona',
+                depart: '7:20 AM', pickup: '7:40 AM · Starbucks, Diamond Bar Blvd',
+                arrival: '8:10 AM · Campus Lot H (~30 min)', status: 'Confirmed',
+                car: '2022 Toyota Camry · Silver', seats: '2 seats available', phone: '(909) 555-0194'
+            },
+            2: {
+                name: 'Marcus Johnson', avatar: '👨‍💼', role: 'Driver',
+                days: 'Wednesday', route: 'Walnut → Cal Poly Pomona',
+                depart: '7:45 AM', pickup: '8:00 AM · Grand Ave & Nogales St, Walnut',
+                arrival: '8:22 AM · Campus Lot B (~22 min)', status: 'Pending',
+                car: '2020 Honda Accord · White', seats: '1 seat available', phone: '(909) 555-0137'
+            },
+            3: {
+                name: 'Sophia Rodriguez', avatar: '👩‍🰳', role: 'Rider (you\'re driving)',
+                days: 'Friday', route: 'Your Home → Chino → Cal Poly Pomona',
+                depart: '7:05 AM', pickup: '7:25 AM · Sophia\'s Home, Chino',
+                arrival: '8:05 AM · Campus Lot G (~40 min)', status: 'Active',
+                car: 'You are driving', seats: '—', phone: '(909) 555-0281'
+            }
+        };
+
+        let cancelTargetId = null;
+        let currentRating = 0;
+        let ratingTargetHistory = null;
+
+        function switchRidesTab(tab, btn) {
+            document.querySelectorAll('.rides-tab').forEach(t => t.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('rides-upcoming').style.display = tab === 'upcoming' ? 'block' : 'none';
+            document.getElementById('rides-history').style.display  = tab === 'history'  ? 'block' : 'none';
+        }
+
+        function openRideDetail(id) {
+            const r = rideDetails[id];
+            if (!r) return;
+            document.getElementById('detail-modal-title').textContent = 'Ride with ' + r.name;
+            document.getElementById('detail-modal-body').innerHTML = `
+                <div class="detail-info-row">
+                    <div class="detail-info-icon">${r.avatar}</div>
+                    <div><div class="detail-info-label">Partner</div><div class="detail-info-val">${r.name} · ${r.role}</div></div>
+                </div>
+                <div class="detail-info-row">
+                    <div class="detail-info-icon">📅</div>
+                    <div><div class="detail-info-label">Days</div><div class="detail-info-val">${r.days}</div></div>
+                </div>
+                <div class="detail-info-row">
+                    <div class="detail-info-icon">🛣️</div>
+                    <div><div class="detail-info-label">Route</div><div class="detail-info-val">${r.route}</div></div>
+                </div>
+                <div class="detail-info-row">
+                    <div class="detail-info-icon">🔵</div>
+                    <div><div class="detail-info-label">Depart</div><div class="detail-info-val">${r.depart}</div></div>
+                </div>
+                <div class="detail-info-row">
+                    <div class="detail-info-icon">🟠</div>
+                    <div><div class="detail-info-label">Pickup</div><div class="detail-info-val">${r.pickup}</div></div>
+                </div>
+                <div class="detail-info-row">
+                    <div class="detail-info-icon">🟢</div>
+                    <div><div class="detail-info-label">Est. Arrival</div><div class="detail-info-val">${r.arrival}</div></div>
+                </div>
+                <div class="detail-info-row">
+                    <div class="detail-info-icon">🚗</div>
+                    <div><div class="detail-info-label">Vehicle</div><div class="detail-info-val">${r.car}</div></div>
+                </div>
+                <div class="detail-info-row">
+                    <div class="detail-info-icon">📞</div>
+                    <div><div class="detail-info-label">Contact</div><div class="detail-info-val">${r.phone}</div></div>
+                </div>
+            `;
+            openModal('ride-detail-modal');
+        }
+
+        function openCancelModal(id) {
+            cancelTargetId = id;
+            document.getElementById('cancel-reason').value = '';
+            document.getElementById('cancel-note').value = '';
+            openModal('cancel-modal');
+        }
+
+        function confirmCancel() {
+            const reason = document.getElementById('cancel-reason').value;
+            if (!reason) { alert('Please select a reason.'); return; }
+            // Remove the ride card from upcoming
+            const card = document.querySelector(`[data-ride-id="${cancelTargetId}"]`);
+            if (card) {
+                card.style.transition = 'opacity 0.3s, transform 0.3s';
+                card.style.opacity = '0';
+                card.style.transform = 'translateX(30px)';
+                setTimeout(() => card.remove(), 300);
+            }
+            closeModal('cancel-modal');
+            showToast('Ride cancelled. Your partner has been notified.');
+            cancelTargetId = null;
+        }
+
+        /* ─── MAPS ─── */
+        const rideMapsData = {
+            1: { origin: 'Diamond+Bar,+CA', waypoint: 'Starbucks,+Diamond+Bar+Blvd,+Diamond+Bar,+CA', dest: 'Cal+Poly+Pomona,+Pomona,+CA' },
+            2: { origin: 'Grand+Ave+%26+Nogales+St,+Walnut,+CA', waypoint: '', dest: 'Cal+Poly+Pomona,+Pomona,+CA' },
+            3: { origin: 'Your+Home', waypoint: 'Chino,+CA', dest: 'Cal+Poly+Pomona,+Pomona,+CA' }
+        };
+
+        function openMaps(id) {
+            const m = rideMapsData[id];
+            if (!m) return;
+            let url;
+            // Try to detect platform – iOS uses maps.apple.com, others use Google Maps
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+            if (isIOS) {
+                const wp = m.waypoint ? `+to:${m.waypoint}` : '';
+                url = `maps://maps.apple.com/?saddr=${m.origin}${wp}&daddr=${m.dest}&dirflg=d`;
+            } else {
+                const wp = m.waypoint ? `&waypoints=${m.waypoint}` : '';
+                url = `https://www.google.com/maps/dir/?api=1&origin=${m.origin}${wp}&destination=${m.dest}&travelmode=driving`;
+            }
+            window.open(url, '_blank');
+        }
+
+        /* ─── SCHEDULE MODAL STATE ─── */
+        let schedRole = 'rider'; // 'rider' or 'driver'
+        let schedTimeMode = 'arrival'; // 'arrival' or 'departure'
+
+        const partnerData = {
+            rider: [
+                { value: 'jordan', label: 'Jordan Chen (94% match)', hint: 'Driver living in Diamond Bar — you\'re along their route to campus via the 60 Fwy.' },
+                { value: 'marcus', label: 'Marcus Johnson (82% match)', hint: 'Driver from Walnut — picks up riders near Grand Ave on their way to campus.' },
+                { value: 'david',  label: 'David Park (76% match)',    hint: 'Driver from Diamond Bar — MWF schedule, passes through your area.' },
+            ],
+            driver: [
+                { value: 'sophia', label: 'Sophia Rodriguez (78% match)', hint: 'Rider in Chino — falls along your route if you take the 71 N toward campus.' },
+                { value: 'emily',  label: 'Emily Zhang (71% match)',       hint: 'Rider near Ontario — lies close to your path via the 60 Fwy on-ramp.' },
+                { value: 'james',  label: 'James Wilson (68% match)',      hint: 'Rider in Fontana — adds ~8 min to your drive but is a verified member.' },
+            ]
+        };
+
+        function setSchedRole(role) {
+            schedRole = role;
+            document.getElementById('role-btn-rider').classList.toggle('active', role === 'rider');
+            document.getElementById('role-btn-driver').classList.toggle('active', role === 'driver');
+
+            // Update partner label & hint copy
+            const label = document.getElementById('sched-partner-label');
+            const noteLabel = document.getElementById('sched-note-label');
+            if (role === 'rider') {
+                label.textContent = 'Select a Driver (you fall along their route)';
+                noteLabel.textContent = 'Note to driver (optional)';
+            } else {
+                label.textContent = 'Select a Rider (they fall along your route)';
+                noteLabel.textContent = 'Note to rider (optional)';
+            }
+
+            // Rebuild partner dropdown
+            const sel = document.getElementById('sched-partner');
+            sel.innerHTML = '<option value="">Choose a match…</option>';
+            partnerData[role].forEach(p => {
+                const opt = document.createElement('option');
+                opt.value = p.value;
+                opt.textContent = p.label;
+                sel.appendChild(opt);
+            });
+            document.getElementById('sched-partner-hint').textContent = '';
+            recalcTimes();
+        }
+
+        function onPartnerChange() {
+            const val = document.getElementById('sched-partner').value;
+            const hint = document.getElementById('sched-partner-hint');
+            const partners = partnerData[schedRole];
+            const found = partners.find(p => p.value === val);
+            hint.textContent = found ? '📍 ' + found.hint : '';
+        }
+
+        function setTimeMode(mode) {
+            schedTimeMode = mode;
+            document.getElementById('tmode-arrival').classList.toggle('active', mode === 'arrival');
+            document.getElementById('tmode-departure').classList.toggle('active', mode === 'departure');
+            document.getElementById('time-input-arrival').style.display  = mode === 'arrival'   ? '' : 'none';
+            document.getElementById('time-input-departure').style.display = mode === 'departure' ? '' : 'none';
+
+            const arrivalLabel = document.getElementById('preview-arrival-label');
+            if (mode === 'arrival') {
+                arrivalLabel.textContent = 'Must arrive by (target)';
+            } else {
+                arrivalLabel.textContent = 'Est. Arrival at Campus';
+            }
+            recalcTimes();
+        }
+
+        /* Simulated traffic estimator — uses time-of-day heuristics for the CPP commute area */
+        function estimateTrafficTimes() {
+            const btn = document.getElementById('traffic-btn');
+            const status = document.getElementById('traffic-status');
+            btn.classList.add('loading');
+            btn.textContent = '⏳ Estimating…';
+            status.textContent = 'Checking typical traffic patterns for this time…';
+
+            setTimeout(() => {
+                // Determine the target time to base traffic on
+                let refMins = 8 * 60; // default 8 AM
+                if (schedTimeMode === 'arrival') {
+                    const v = document.getElementById('sched-arrival').value;
+                    if (v) refMins = timeToMins(v);
+                } else {
+                    const v = document.getElementById('sched-departure').value;
+                    if (v) refMins = timeToMins(v);
+                }
+
+                // Morning peak 7–9 AM is heavy; 6–7 AM moderate; otherwise light
+                let trafficLevel, leg1, leg2, badgeClass, badgeText;
+                if (refMins >= 7 * 60 && refMins <= 9 * 60) {
+                    trafficLevel = 'heavy';  leg1 = 20; leg2 = 35; badgeClass = 'traffic-heavy'; badgeText = '🔴 Heavy';
+                } else if ((refMins >= 6 * 60 && refMins < 7 * 60) || (refMins > 9 * 60 && refMins <= 10 * 60)) {
+                    trafficLevel = 'moderate'; leg1 = 15; leg2 = 25; badgeClass = 'traffic-moderate'; badgeText = '🟡 Moderate';
+                } else {
+                    trafficLevel = 'light';  leg1 = 10; leg2 = 18; badgeClass = 'traffic-light'; badgeText = '🟢 Light';
+                }
+
+                // Jitter slightly by role/partner for realism
+                if (schedRole === 'driver') { leg1 = Math.round(leg1 * 1.1); }
+
+                document.getElementById('sched-leg1-mins').value = leg1;
+                document.getElementById('sched-leg2-mins').value = leg2;
+
+                const b1 = document.getElementById('leg1-traffic-badge');
+                const b2 = document.getElementById('leg2-traffic-badge');
+                b1.textContent = badgeText; b1.className = 'drive-leg-badge ' + badgeClass;
+                b2.textContent = badgeText; b2.className = 'drive-leg-badge ' + badgeClass;
+
+                const msgs = { heavy: 'Heavy traffic expected — estimated from typical I-60 morning patterns.', moderate: 'Moderate traffic. Consider leaving 5–10 min early.', light: 'Light traffic expected. Times should be reliable.' };
+                status.textContent = '✅ ' + msgs[trafficLevel];
+                btn.classList.remove('loading');
+                btn.textContent = '🔄 Auto-estimate from traffic';
+                recalcTimes();
+            }, 1100);
+        }
+
+        /* ─── SCHEDULE TIME CALCULATOR ─── */
+        function fmtTime(totalMins) {
+            const h = Math.floor(((totalMins % 1440) + 1440) % 1440 / 60);
+            const m = ((totalMins % 60) + 60) % 60;
+            const ampm = h >= 12 ? 'PM' : 'AM';
+            const h12 = h % 12 || 12;
+            return `${h12}:${String(m).padStart(2, '0')} ${ampm}`;
+        }
+
+        function timeToMins(timeStr) {
+            const [h, m] = timeStr.split(':').map(Number);
+            return h * 60 + m;
+        }
+
+        function recalcTimes() {
+            const leg1 = parseInt(document.getElementById('sched-leg1-mins').value) || 0;
+            const leg2 = parseInt(document.getElementById('sched-leg2-mins').value) || 0;
+            const buffer = parseInt(document.getElementById('sched-buffer').value) || 10;
+
+            if (leg1 <= 0 || leg2 <= 0) {
+                document.getElementById('calc-depart').textContent = '—';
+                document.getElementById('calc-pickup').textContent = '—';
+                document.getElementById('calc-arrival').textContent = '—';
+                document.getElementById('calc-note').textContent = '';
+                return;
+            }
+
+            let departMins, pickupMins, arrivalMins;
+
+            if (schedTimeMode === 'arrival') {
+                const arrivalStr = document.getElementById('sched-arrival').value;
+                if (!arrivalStr) { clearCalc(); return; }
+                arrivalMins = timeToMins(arrivalStr);
+                // Work backwards: arrival target includes buffer
+                pickupMins  = arrivalMins - leg2 - buffer;
+                departMins  = pickupMins - leg1;
+            } else {
+                const depStr = document.getElementById('sched-departure').value;
+                if (!depStr) { clearCalc(); return; }
+                departMins = timeToMins(depStr);
+                pickupMins  = departMins + leg1;
+                arrivalMins = pickupMins + leg2 + buffer;
+            }
+
+            document.getElementById('calc-depart').textContent  = fmtTime(departMins);
+            document.getElementById('calc-pickup').textContent  = fmtTime(pickupMins);
+            document.getElementById('calc-arrival').textContent = fmtTime(arrivalMins);
+
+            const totalMins = leg1 + leg2;
+            if (departMins < 5 * 60) {
+                document.getElementById('calc-note').textContent = '⚠️ Very early departure — double-check your drive times.';
+            } else {
+                const modeNote = schedTimeMode === 'arrival'
+                    ? `Depart by ${fmtTime(departMins)} to arrive with a ${buffer}-min buffer.`
+                    : `Leaving at ${fmtTime(departMins)} puts you on campus by ${fmtTime(arrivalMins)} (incl. ${buffer}-min buffer).`;
+                document.getElementById('calc-note').textContent = `Total drive: ~${totalMins} min. ${modeNote}`;
+            }
+        }
+
+        function clearCalc() {
+            ['calc-depart','calc-pickup','calc-arrival'].forEach(id => document.getElementById(id).textContent = '—');
+            document.getElementById('calc-note').textContent = '';
+        }
+
+        function openScheduleModal() {
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            document.getElementById('sched-date').value = tomorrow.toISOString().split('T')[0];
+            document.getElementById('sched-pickup').value = '';
+            document.getElementById('sched-note').value = '';
+            document.getElementById('sched-repeat').value = 'once';
+            document.getElementById('sched-arrival').value = '08:00';
+            document.getElementById('sched-departure').value = '07:20';
+            document.getElementById('sched-leg1-mins').value = '15';
+            document.getElementById('sched-leg2-mins').value = '20';
+            document.getElementById('sched-buffer').value = '10';
+            document.getElementById('leg1-traffic-badge').textContent = '';
+            document.getElementById('leg2-traffic-badge').textContent = '';
+            document.getElementById('traffic-status').textContent = '';
+            // Reset role and time mode
+            setSchedRole('rider');
+            setTimeMode('arrival');
+            // Wire up partner hint
+            document.getElementById('sched-partner').onchange = onPartnerChange;
+            recalcTimes();
+            openModal('schedule-modal');
+        }
+
+        function confirmSchedule() {
+            const partner = document.getElementById('sched-partner').value;
+            const date    = document.getElementById('sched-date').value;
+            const pickup  = document.getElementById('sched-pickup').value;
+            const leg1    = parseInt(document.getElementById('sched-leg1-mins').value) || 0;
+            const leg2    = parseInt(document.getElementById('sched-leg2-mins').value) || 0;
+            if (!partner || !date || !pickup || leg1 <= 0 || leg2 <= 0) {
+                alert('Please fill in partner, date, pickup location, and both drive time legs.');
+                return;
+            }
+            closeModal('schedule-modal');
+            const roleMsg = schedRole === 'rider' ? 'Ride request sent to driver!' : 'Pickup request sent to rider!';
+            showToast(roleMsg + ' Awaiting confirmation.');
+        }
+
+        function openRatingModal(name, histIdx) {
+            currentRating = 0;
+            ratingTargetHistory = histIdx;
+            document.getElementById('rating-person-name').textContent = name;
+            document.getElementById('rating-comment').value = '';
+            document.querySelectorAll('.star').forEach(s => s.classList.remove('active'));
+            openModal('rating-modal');
+        }
+
+        function setRating(val) {
+            currentRating = val;
+            document.querySelectorAll('.star').forEach(s => {
+                s.classList.toggle('active', parseInt(s.dataset.val) <= val);
+            });
+        }
+
+        function submitRating() {
+            if (!currentRating) { alert('Please select a star rating.'); return; }
+            closeModal('rating-modal');
+            showToast(`Thanks! You rated the ride ${currentRating} ⭐`);
+        }
+
+        function openModal(id) {
+            document.getElementById(id).classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        function closeModalOnOverlay(event, id) {
+            if (event.target === document.getElementById(id)) closeModal(id);
+        }
+
+        let toastTimer = null;
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.classList.add('show');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => t.classList.remove('show'), 3200);
+        }
+
+        /* ─── FRIENDS ─── */
+        function switchFriendsTab(tab, btn) {
+            document.querySelectorAll('#friends .rides-tab').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('friends-panel-all').style.display     = tab === 'all'     ? '' : 'none';
+            document.getElementById('friends-panel-riding').style.display  = tab === 'riding'  ? '' : 'none';
+            document.getElementById('friends-panel-pending').style.display = tab === 'pending' ? '' : 'none';
+        }
+
+        function openAddFriendModal() {
+            document.getElementById('add-friend-input').value = '';
+            document.getElementById('add-friend-result').style.display = 'none';
+            openModal('add-friend-modal');
+        }
+
+        const fakePeople = [
+            { query: ['aisha','patel','aisha.patel','aisha@cpp.edu'], name: 'Aisha Patel', meta: 'Chemistry · Junior · Rancho Cucamonga' },
+            { query: ['ryan','nguyen','ryan@cpp.edu'], name: 'Ryan Nguyen', meta: 'Mechanical Engineering · Senior · Pomona' },
+            { query: ['lisa','kim','lisa@cpp.edu'], name: 'Lisa Kim', meta: 'Psychology · Freshman · Chino Hills' },
+        ];
+
+        function searchFriend() {
+            const q = document.getElementById('add-friend-input').value.trim().toLowerCase();
+            const result = document.getElementById('add-friend-result');
+            if (!q) return;
+            const found = fakePeople.find(p => p.query.some(k => k.includes(q) || q.includes(k)));
+            if (found) {
+                document.getElementById('add-friend-found-name').textContent = found.name;
+                document.getElementById('add-friend-found-meta').textContent = found.meta;
+                result.style.display = 'block';
+            } else {
+                result.style.display = 'none';
+                showToast('No student found — check the name or email and try again.');
+            }
+        }
+
+        function sendFriendRequest() {
+            const name = document.getElementById('add-friend-found-name').textContent;
+            closeModal('add-friend-modal');
+            showToast(`Friend request sent to ${name}!`);
+        }
+
+        function acceptFriendRequest(btn) {
+            const card = btn.closest('.friend-request-card');
+            const name = card.querySelector('.friend-name').textContent;
+            card.style.transition = 'opacity 0.3s';
+            card.style.opacity = '0';
+            setTimeout(() => card.remove(), 300);
+            showToast(`${name} is now your carpool friend! 🎉`);
+            const badge = document.querySelector('#friends-tab-pending .unread-badge');
+            if (badge) {
+                const n = parseInt(badge.textContent) - 1;
+                if (n <= 0) badge.remove(); else badge.textContent = n;
+            }
+        }
+
+        function declineFriendRequest(btn) {
+            const card = btn.closest('.friend-request-card');
+            card.style.transition = 'opacity 0.3s';
+            card.style.opacity = '0';
+            setTimeout(() => card.remove(), 300);
+            const badge = document.querySelector('#friends-tab-pending .unread-badge');
+            if (badge) {
+                const n = parseInt(badge.textContent) - 1;
+                if (n <= 0) badge.remove(); else badge.textContent = n;
+            }
         }
 
         showPage('login');
