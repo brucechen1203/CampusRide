@@ -102,6 +102,71 @@
             gap: 16px;
         }
 
+        .notifications-btn {
+            font-size: 20px;
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+        }
+
+        .notifications-btn:hover {
+            background: var(--white);
+            border-color: var(--green);
+        }
+
+        .user-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 8px;
+            width: 220px;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            z-index: 200;
+            overflow: hidden;
+        }
+
+        .dropdown-header {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            background: var(--card);
+        }
+
+        .dropdown-item {
+            padding: 12px 16px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--slate);
+            cursor: pointer;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(34, 197, 94, 0.05);
+            color: var(--green);
+        }
+
+        .dropdown-item.logout {
+            color: var(--red);
+        }
+
+        .dropdown-item.logout:hover {
+            background: #fef2f2;
+        }
+
         .avatar {
             width: 40px;
             height: 40px;
@@ -1555,6 +1620,7 @@
             gap: 14px;
             align-items: flex-start;
             transition: all 0.2s;
+            flex-wrap: wrap;
         }
 
         .friend-card:hover {
@@ -1573,7 +1639,7 @@
             flex-shrink: 0;
         }
 
-        .friend-info { flex: 1; min-width: 0; }
+        .friend-info { flex: 1; min-width: 160px; }
 
         .friend-name {
             font-weight: 700;
@@ -1600,6 +1666,8 @@
             align-items: flex-end;
             gap: 6px;
             flex-shrink: 0;
+            flex: 1;
+            min-width: 140px;
         }
 
         .friend-status {
@@ -1686,7 +1754,21 @@
             </div>
         </div>
         <div class="header-right">
-            <div class="avatar" id="user-avatar" onclick="logoutUser()" title="Logout">AJ</div>
+            <div class="notifications-btn" onclick="openNotificationsPanel()">
+                🔔
+                <div class="unread-badge" style="position: absolute; top: -6px; right: -6px; font-size: 9px; width: 18px; height: 18px; border: 2px solid white;">3</div>
+            </div>
+            <div style="position: relative;">
+                <div class="avatar" id="user-avatar" onclick="toggleUserDropdown()" title="Menu">AJ</div>
+                <div id="user-dropdown" class="user-dropdown hidden">
+                    <div class="dropdown-header">
+                        <div id="dropdown-name" style="font-weight: 700; font-size: 14px; color: var(--dark);">Alex Johnson</div>
+                        <div id="dropdown-email" style="font-size: 12px; color: var(--muted); margin-top: 2px;">you@cpp.edu</div>
+                    </div>
+                    <div class="dropdown-item" onclick="showPage('my-profile'); toggleUserDropdown()">👤 My Profile & Settings</div>
+                    <div class="dropdown-item logout" onclick="logoutUser(); toggleUserDropdown()">🚪 Logout</div>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -1909,7 +1991,7 @@
                         <span class="tag">4.8⭐</span>
                     </div>
                     <div class="match-action">
-                        <button class="view-profile">View Profile</button>
+                        <button class="view-profile" onclick="viewSampleProfile('Jordan Chen', 'Computer Science • Junior at Cal Poly Pomona', '👩‍🎓', 4.8, 'Friendly and punctual driver! Love good music and conversations on the drive.')">View Profile</button>
                         <button class="message">Message</button>
                     </div>
                 </div>
@@ -1929,7 +2011,7 @@
                         <span class="tag">4.6⭐</span>
                     </div>
                     <div class="match-action">
-                        <button class="view-profile">View Profile</button>
+                        <button class="view-profile" onclick="viewSampleProfile('Marcus Johnson', 'Engineering • Senior at Cal Poly Pomona', '👨‍🏫', 4.6, 'Quiet commuter, I just like to listen to podcasts on the way in.')">View Profile</button>
                         <button class="message">Message</button>
                     </div>
                 </div>
@@ -1949,7 +2031,7 @@
                         <span class="tag">4.7⭐</span>
                     </div>
                     <div class="match-action">
-                        <button class="view-profile">View Profile</button>
+                        <button class="view-profile" onclick="viewSampleProfile('Sophia Rodriguez', 'Business • Sophomore at Cal Poly Pomona', '👩‍🰳', 4.7, 'Happy to share gas money! Looking for TTh rides to campus.')">View Profile</button>
                         <button class="message">Message</button>
                     </div>
                 </div>
@@ -1969,7 +2051,7 @@
                         <span class="tag">4.5⭐</span>
                     </div>
                     <div class="match-action">
-                        <button class="view-profile">View Profile</button>
+                        <button class="view-profile" onclick="viewSampleProfile('David Park', 'Data Science • Junior at Cal Poly Pomona', '👨‍💻', 4.5, 'Usually work in the library after classes. MWF routine.')">View Profile</button>
                         <button class="message">Message</button>
                     </div>
                 </div>
@@ -1989,7 +2071,7 @@
                         <span class="tag">4.9⭐</span>
                     </div>
                     <div class="match-action">
-                        <button class="view-profile">View Profile</button>
+                        <button class="view-profile" onclick="viewSampleProfile('Emily Zhang', 'Art History • Freshman at Cal Poly Pomona', '👩‍🎨', 4.9, 'Freshman learning the ropes. Happy to chat and carpool!')">View Profile</button>
                         <button class="message">Message</button>
                     </div>
                 </div>
@@ -2009,7 +2091,7 @@
                         <span class="tag">4.4⭐</span>
                     </div>
                     <div class="match-action">
-                        <button class="view-profile">View Profile</button>
+                        <button class="view-profile" onclick="viewSampleProfile('James Wilson', 'Pre-Med • Sophomore at Cal Poly Pomona', '👨‍🏥', 4.4, 'Very early mornings for labs. If you get up early, let\'s ride.')">View Profile</button>
                         <button class="message">Message</button>
                     </div>
                 </div>
@@ -2021,10 +2103,10 @@
             <button class="nav-btn" onclick="goBack()" style="margin-bottom: 20px;">← Back</button>
             
             <div class="profile-hero">
-                <div class="profile-avatar">👩‍🎓</div>
-                <div class="profile-name">Jordan Chen</div>
-                <div class="profile-major">Computer Science • Junior at Cal Poly Pomona</div>
-                <div class="profile-badge">⭐ 4.8 Rating (24 reviews)</div>
+                <div class="profile-avatar" id="sample-profile-avatar">👩‍🎓</div>
+                <div class="profile-name" id="sample-profile-name">Jordan Chen</div>
+                <div class="profile-major" id="sample-profile-major">Computer Science • Junior at Cal Poly Pomona</div>
+                <div class="profile-badge">⭐ <span id="sample-profile-rating">4.8</span> Rating</div>
             </div>
 
             <div class="detail-section">
@@ -2056,7 +2138,7 @@
                     <div class="detail-icon">💬</div>
                     <div class="detail-content">
                         <div class="detail-label">Bio</div>
-                        <div class="detail-value">Friendly and punctual driver! Love good music and conversations on the drive.</div>
+                        <div class="detail-value" id="sample-profile-bio">Friendly and punctual driver! Love good music and conversations on the drive.</div>
                     </div>
                 </div>
                 <div class="detail-row">
@@ -2071,6 +2153,67 @@
             <div style="display: flex; gap: 12px; margin-top: 24px;">
                 <button class="btn btn-primary" onclick="showPage('messages')" style="flex: 1; margin: 0;">Send Message</button>
                 <button class="btn btn-secondary" style="flex: 1;">Report Profile</button>
+            </div>
+        </div>
+
+        <!-- MY PROFILE & SETTINGS -->
+        <div id="my-profile" class="page">
+            <button class="nav-btn" onclick="showPage('dashboard')" style="margin-bottom: 20px;">← Back</button>
+            
+            <h2 style="font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 800; color: var(--dark); margin-bottom: 24px;">My Profile</h2>
+
+            <div class="detail-section" style="display:flex; flex-direction:column; gap:16px;">
+                <div class="form-group" style="text-align: center;">
+                    <div class="profile-avatar" style="margin:0 auto 8px;" id="my-profile-avatar-display">AJ</div>
+                    <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;">Change Picture</button>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" class="form-input" id="my-profile-name" value="Alex Johnson">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Preferred Pronouns</label>
+                    <input type="text" class="form-input" id="my-profile-pronouns" value="They/Them">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Car</label>
+                    <input type="text" class="form-input" id="my-profile-car" value="2018 Honda Civic">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">About Me</label>
+                    <textarea class="form-input" id="my-profile-bio" rows="3" style="resize:none;">I'm a senior majoring in Biology. I love hiking and reading.</textarea>
+                </div>
+
+                <button class="btn btn-primary" onclick="saveMyProfile()">Save Changes</button>
+            </div>
+        </div>
+
+        <!-- NOTIFICATIONS PANEL -->
+        <div id="notifications-modal" class="modal-overlay" onclick="closeModalOnOverlay(event,'notifications-modal')">
+            <div class="modal-card">
+                <div class="modal-header">
+                    <div class="modal-title">Notifications</div>
+                    <button class="modal-close" onclick="closeModal('notifications-modal')">✕</button>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:12px;">
+                    <div style="padding:12px; border:1px solid var(--border); border-radius:12px; background:var(--card);">
+                        <div style="font-weight:700; font-size:13px;">New Ride Request</div>
+                        <div style="font-size:12px; color:var(--muted);">Sophia requested a ride on Friday morning.</div>
+                    </div>
+                    <div style="padding:12px; border:1px solid var(--border); border-radius:12px; background:var(--card);">
+                        <div style="font-weight:700; font-size:13px;">Ride Confirmed</div>
+                        <div style="font-size:12px; color:var(--muted);">Jordan accepted your schedule request.</div>
+                    </div>
+                    <div style="padding:12px; border:1px solid var(--border); border-radius:12px; background:var(--card);">
+                        <div style="font-weight:700; font-size:13px;">Friend Request</div>
+                        <div style="font-size:12px; color:var(--muted);">Aisha Patel sent you a friend request.</div>
+                    </div>
+                </div>
+                <button class="btn btn-secondary" style="width:100%; margin-top:16px;" onclick="closeModal('notifications-modal')">Mark all as read</button>
             </div>
         </div>
 
@@ -2105,9 +2248,10 @@
                         </div>
                         <div class="friend-actions">
                             <div class="friend-status friend-status-riding">🚗 Riding together</div>
-                            <div style="display:flex;gap:6px;margin-top:8px;">
+                            <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;justify-content:flex-end;">
                                 <button class="friend-btn friend-btn-msg" onclick="showPage('messages')">Message</button>
                                 <button class="friend-btn friend-btn-schedule" onclick="openScheduleModal()">Schedule</button>
+                                <button class="friend-btn friend-btn-msg" style="color:var(--red);border-color:#fecaca;" onclick="removeFriend(this)">Remove</button>
                             </div>
                         </div>
                     </div>
@@ -2125,9 +2269,10 @@
                         </div>
                         <div class="friend-actions">
                             <div class="friend-status friend-status-riding">🚗 Riding together</div>
-                            <div style="display:flex;gap:6px;margin-top:8px;">
+                            <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;justify-content:flex-end;">
                                 <button class="friend-btn friend-btn-msg" onclick="showPage('messages')">Message</button>
                                 <button class="friend-btn friend-btn-schedule" onclick="openScheduleModal()">Schedule</button>
+                                <button class="friend-btn friend-btn-msg" style="color:var(--red);border-color:#fecaca;" onclick="removeFriend(this)">Remove</button>
                             </div>
                         </div>
                     </div>
@@ -2145,9 +2290,10 @@
                         </div>
                         <div class="friend-actions">
                             <div class="friend-status friend-status-riding">🚗 Riding together</div>
-                            <div style="display:flex;gap:6px;margin-top:8px;">
+                            <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;justify-content:flex-end;">
                                 <button class="friend-btn friend-btn-msg" onclick="showPage('messages')">Message</button>
                                 <button class="friend-btn friend-btn-schedule" onclick="openScheduleModal()">Schedule</button>
+                                <button class="friend-btn friend-btn-msg" style="color:var(--red);border-color:#fecaca;" onclick="removeFriend(this)">Remove</button>
                             </div>
                         </div>
                     </div>
@@ -2165,9 +2311,10 @@
                         </div>
                         <div class="friend-actions">
                             <div class="friend-status friend-status-connected">✓ Connected</div>
-                            <div style="display:flex;gap:6px;margin-top:8px;">
+                            <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;justify-content:flex-end;">
                                 <button class="friend-btn friend-btn-msg" onclick="showPage('messages')">Message</button>
                                 <button class="friend-btn friend-btn-schedule" onclick="openScheduleModal()">Schedule</button>
+                                <button class="friend-btn friend-btn-msg" style="color:var(--red);border-color:#fecaca;" onclick="removeFriend(this)">Remove</button>
                             </div>
                         </div>
                     </div>
@@ -2185,9 +2332,10 @@
                         </div>
                         <div class="friend-actions">
                             <div class="friend-status friend-status-connected">✓ Connected</div>
-                            <div style="display:flex;gap:6px;margin-top:8px;">
+                            <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;justify-content:flex-end;">
                                 <button class="friend-btn friend-btn-msg">Message</button>
                                 <button class="friend-btn friend-btn-schedule" onclick="openScheduleModal()">Schedule</button>
+                                <button class="friend-btn friend-btn-msg" style="color:var(--red);border-color:#fecaca;" onclick="removeFriend(this)">Remove</button>
                             </div>
                         </div>
                     </div>
@@ -2397,7 +2545,43 @@
             <!-- Tabs -->
             <div class="rides-tabs">
                 <button class="rides-tab active" onclick="switchRidesTab('upcoming', this)">Upcoming</button>
+                <button class="rides-tab" onclick="switchRidesTab('requests', this)">Requests</button>
                 <button class="rides-tab" onclick="switchRidesTab('history', this)">History</button>
+            </div>
+
+            <!-- REQUESTS TAB -->
+            <div id="rides-requests" class="rides-tab-panel" style="display:none;">
+                <h3 style="font-size: 14px; margin-bottom: 12px; color: var(--dark);">Incoming Requests</h3>
+                <div class="ride-card" style="flex-direction: column; align-items: stretch; gap: 12px; margin-bottom: 24px;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div class="ride-avatar" style="background: linear-gradient(135deg, #ec4899, #8b5cf6);">👩‍🰳</div>
+                        <div class="ride-info">
+                            <div class="ride-name">Sophia Rodriguez <span style="font-weight: 400; color: var(--muted); font-size: 12px;">wants to join your ride</span></div>
+                            <div class="ride-meta">This Friday · 7:05 AM</div>
+                        </div>
+                        <div class="ride-badge" style="background:#fef3c7; color:#b45309;">Action Required</div>
+                    </div>
+                    <div style="display:flex; gap:8px;">
+                        <button class="ride-action-btn" style="background:var(--green); color:white; border-color:var(--green);">Accept</button>
+                        <button class="ride-action-btn ride-action-cancel">Decline</button>
+                    </div>
+                </div>
+
+                <h3 style="font-size: 14px; margin-bottom: 12px; color: var(--dark);">Outgoing Requests</h3>
+                <div class="ride-card" style="flex-direction: column; align-items: stretch; gap: 12px;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div class="ride-avatar" style="background: linear-gradient(135deg, #3b82f6, #6366f1);">👨‍💼</div>
+                        <div class="ride-info">
+                            <div class="ride-name">Marcus Johnson <span style="font-weight: 400; color: var(--muted); font-size: 12px;">(Driver)</span></div>
+                            <div class="ride-meta">Next Wed · 8:00 AM</div>
+                        </div>
+                        <div class="ride-badge" style="background:#f8fafc; color:var(--muted); border:1px solid var(--border);">Pending</div>
+                    </div>
+                    <div style="display:flex; gap:8px;">
+                        <button class="ride-action-btn ride-action-view" onclick="showPage('messages')">Message</button>
+                        <button class="ride-action-btn ride-action-cancel">Cancel Request</button>
+                    </div>
+                </div>
             </div>
 
             <!-- UPCOMING TAB -->
@@ -2808,14 +2992,7 @@
 
     <script>
         // Match data for search and filtering
-        const matchesData = [
-            { id: 1, name: 'Jordan Chen', major: 'Computer Science', year: 'Junior', score: 94, tags: ['Same Hours', 'Verified', '4.8⭐'], schedule: 'mwf', rating: 4.8, neighborhood: true, avatar: '👩‍🎓', location: 'Diamond Bar' },
-            { id: 2, name: 'Marcus Johnson', major: 'Engineering', year: 'Senior', score: 82, tags: ['Similar Route', 'Verified', '4.6⭐'], schedule: 'other', rating: 4.6, neighborhood: false, avatar: '👨‍💼', location: 'Walnut' },
-            { id: 3, name: 'Sophia Rodriguez', major: 'Business', year: 'Sophomore', score: 78, tags: ['TTh Schedule', 'Verified', '4.7⭐'], schedule: 'tth', rating: 4.7, neighborhood: false, avatar: '👩‍🰳', location: 'Chino' },
-            { id: 4, name: 'David Park', major: 'Data Science', year: 'Junior', score: 76, tags: ['MWF Schedule', 'Verified', '4.5⭐'], schedule: 'mwf', rating: 4.5, neighborhood: false, avatar: '👨‍💻', location: 'Diamond Bar' },
-            { id: 5, name: 'Emily Zhang', major: 'Art History', year: 'Freshman', score: 71, tags: ['Same Dorm', 'Verified', '4.9⭐'], schedule: 'mwf', rating: 4.9, neighborhood: true, avatar: '👩‍🎨', location: 'Ontario' },
-            { id: 6, name: 'James Wilson', major: 'Pre-Med', year: 'Sophomore', score: 68, tags: ['Early Morning', 'Verified', '4.4⭐'], schedule: 'mwf', rating: 4.4, neighborhood: false, avatar: '👨‍🏥', location: 'Fontana' }
-        ];
+        const matchesData = [[{"id":1,"name":"Jordan Chen","major":"Computer Science","year":"Junior","score":94,"tags":["Same Hours","Verified","4.8⭐"],"schedule":"mwf","rating":4.8,"neighborhood":true,"avatar":"👤","location":"Diamond Bar"},{"id":2,"name":"Marcus Johnson","major":"Engineering","year":"Senior","score":82,"tags":["Similar Route","Verified","4.6⭐"],"schedule":"other","rating":4.6,"neighborhood":false,"avatar":"👤","location":"Walnut"},{"id":3,"name":"Sophia Rodriguez","major":"Business","year":"Sophomore","score":78,"tags":["TTh Schedule","Verified","4.7⭐"],"schedule":"tth","rating":4.7,"neighborhood":false,"avatar":"👤","location":"Chino"},{"id":4,"name":"David Park","major":"Data Science","year":"Junior","score":76,"tags":["MWF Schedule","Verified","4.5⭐"],"schedule":"mwf","rating":4.5,"neighborhood":false,"avatar":"👤","location":"Diamond Bar"},{"id":5,"name":"Emily Zhang","major":"Art History","year":"Freshman","score":71,"tags":["Same Dorm","Verified","4.9⭐"],"schedule":"mwf","rating":4.9,"neighborhood":true,"avatar":"👤","location":"Ontario"},{"id":6,"name":"James Wilson","major":"Pre-Med","year":"Sophomore","score":68,"tags":["Early Morning","Verified","4.4⭐"],"schedule":"mwf","rating":4.4,"neighborhood":false,"avatar":"👤","location":"Fontana"}]];
 
         // Conversation data
         const conversations = {
@@ -2862,6 +3039,49 @@
         let currentFilter = 'all';
         let searchTerm = '';
         let selectedStartLocation = '';
+
+        function toggleUserDropdown() {
+            const dropdown = document.getElementById('user-dropdown');
+            dropdown.classList.toggle('hidden');
+        }
+
+        function openNotificationsPanel() {
+            openModal('notifications-modal');
+        }
+
+        function viewSampleProfile(name, major, avatar, rating, bio) {
+            document.getElementById('sample-profile-name').textContent = name;
+            document.getElementById('sample-profile-major').textContent = major;
+            document.getElementById('sample-profile-avatar').textContent = avatar;
+            document.getElementById('sample-profile-rating').textContent = rating;
+            document.getElementById('sample-profile-bio').textContent = bio;
+            showPage('profile');
+        }
+        
+        function saveMyProfile() {
+            const name = document.getElementById('my-profile-name').value;
+            const pronouns = document.getElementById('my-profile-pronouns').value;
+            const car = document.getElementById('my-profile-car').value;
+            
+            document.getElementById('dropdown-name').textContent = name;
+            document.getElementById('greeting-name').textContent = name.split(' ')[0];
+            document.getElementById('user-avatar').textContent = getInitials(name) || 'CR';
+            document.getElementById('my-profile-avatar-display').textContent = getInitials(name) || 'CR';
+            
+            showToast('Profile saved successfully!');
+            showPage('dashboard');
+        }
+
+        function removeFriend(btn) {
+            if (confirm("Are you sure you want to remove this friend?")) {
+                const card = btn.closest('.friend-card');
+                card.style.transition = 'opacity 0.3s, transform 0.3s';
+                card.style.opacity = '0';
+                card.style.transform = 'scale(0.95)';
+                setTimeout(() => card.remove(), 300);
+                showToast("Friend removed.");
+            }
+        }
 
         function setAppShellVisibility() {
             const header = document.getElementById('app-header');
@@ -2921,6 +3141,10 @@
             isLoggedIn = true;
             document.getElementById('user-avatar').textContent = getInitials(name) || 'CR';
             document.getElementById('greeting-name').textContent = name.split(' ')[0];
+            document.getElementById('dropdown-name').textContent = name;
+            document.getElementById('dropdown-email').textContent = email;
+            document.getElementById('my-profile-name').value = name;
+            document.getElementById('my-profile-avatar-display').textContent = getInitials(name) || 'CR';
 
             if (remember) {
                 localStorage.setItem('campusRideUserName', name);
@@ -3096,6 +3320,14 @@
 
         // Auto-resize textarea
         document.addEventListener('DOMContentLoaded', function() {
+            const savedEmail = localStorage.getItem('campusRideUserEmail');
+            const savedName = localStorage.getItem('campusRideUserName');
+            if (savedEmail) {
+                document.getElementById('login-email').value = savedEmail;
+                document.getElementById('login-name').value = savedName || '';
+                document.getElementById('remember-me').checked = true;
+            }
+
             const chatInput = document.getElementById('chat-input');
             
             if (chatInput) {
@@ -3209,9 +3441,10 @@
         let ratingTargetHistory = null;
 
         function switchRidesTab(tab, btn) {
-            document.querySelectorAll('.rides-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('#my-rides .rides-tab').forEach(t => t.classList.remove('active'));
             btn.classList.add('active');
             document.getElementById('rides-upcoming').style.display = tab === 'upcoming' ? 'block' : 'none';
+            document.getElementById('rides-requests').style.display = tab === 'requests' ? 'block' : 'none';
             document.getElementById('rides-history').style.display  = tab === 'history'  ? 'block' : 'none';
         }
 
