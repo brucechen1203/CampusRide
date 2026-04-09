@@ -1,0 +1,2033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CampusRide - Find Your Carpool Today</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green: #22c55e;
+            --green-dark: #16a34a;
+            --green-light: #bbf7d0;
+            --dark: #0f172a;
+            --slate: #1e293b;
+            --muted: #64748b;
+            --border: #e2e8f0;
+            --white: #ffffff;
+            --card: #f8fafc;
+            --orange: #f97316;
+            --blue: #3b82f6;
+            --red: #ef4444;
+            --purple: #8b5cf6;
+            --yellow: #eab308;
+            --gray: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            min-height: 100vh;
+        }
+
+        /* ─── HEADER ─── */
+        header {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--slate);
+        }
+
+        .logo span {
+            color: var(--green);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-btn {
+            padding: 8px 16px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            color: var(--slate);
+            font-weight: 500;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+
+        .nav-btn:hover {
+            background: var(--white);
+            border-color: var(--green);
+            color: var(--green);
+        }
+
+        .nav-btn.active {
+            background: rgba(34, 197, 94, 0.1);
+            border-color: var(--green);
+            color: var(--green);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        /* ─── MAIN CONTENT ─── */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* ─── LOGIN PAGE ─── */
+        .login-wrap {
+            min-height: calc(100vh - 96px);
+            display: grid;
+            place-items: center;
+            padding: 24px;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 460px;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            box-shadow: 0 16px 50px rgba(15, 23, 42, 0.08);
+            overflow: hidden;
+        }
+
+        .login-hero {
+            padding: 28px 24px;
+            background: linear-gradient(145deg, #0f172a, #102616);
+            color: var(--white);
+        }
+
+        .login-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 30px;
+            font-weight: 800;
+            line-height: 1.1;
+        }
+
+        .login-title span {
+            color: var(--green-light);
+        }
+
+        .login-sub {
+            margin-top: 8px;
+            color: #cbd5e1;
+            font-size: 13px;
+        }
+
+        .login-form {
+            padding: 22px 24px 24px;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--muted);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.2px;
+        }
+
+        .form-input,
+        .form-select {
+            width: 100%;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 11px 12px;
+            font-size: 14px;
+            color: var(--dark);
+            font-family: 'Inter', sans-serif;
+            background: var(--white);
+        }
+
+        .form-input:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--green);
+            box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.12);
+        }
+
+        .form-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .remember {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--slate);
+        }
+
+        .login-error {
+            color: #b91c1c;
+            font-size: 12px;
+            font-weight: 600;
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 10px;
+            padding: 10px 12px;
+            margin-bottom: 12px;
+            display: none;
+        }
+
+        .login-success {
+            color: #166534;
+            font-size: 12px;
+            font-weight: 600;
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 10px;
+            padding: 10px 12px;
+            margin-bottom: 12px;
+            display: none;
+        }
+
+        .login-btn {
+            width: 100%;
+            border: none;
+            border-radius: 12px;
+            padding: 12px;
+            color: var(--white);
+            font-size: 14px;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            box-shadow: 0 8px 22px rgba(34, 197, 94, 0.28);
+        }
+
+        .login-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        /* ─── SPLASH SCREEN ─── */
+        .splash {
+            text-align: center;
+            padding: 80px 40px;
+            background: linear-gradient(160deg, #f8fafc 0%, #f0fdf4 100%);
+            border-radius: 24px;
+        }
+
+        .splash-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            border-radius: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 32px;
+            font-size: 48px;
+            box-shadow: 0 12px 40px rgba(34, 197, 94, 0.25);
+        }
+
+        .splash-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 16px;
+        }
+
+        .splash-title span {
+            color: var(--green);
+        }
+
+        .splash-subtitle {
+            font-size: 16px;
+            color: var(--muted);
+            margin-bottom: 48px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .splash-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 48px;
+        }
+
+        .stat-pill {
+            text-align: center;
+        }
+
+        .stat-num {
+            font-family: 'Poppins', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--green);
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+            box-shadow: 0 6px 20px rgba(34, 197, 94, 0.35);
+            margin-right: 12px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(34, 197, 94, 0.45);
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--slate);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--card);
+            border-color: var(--green);
+            color: var(--green);
+        }
+
+        /* ─── DASHBOARD ─── */
+        .greeting-section {
+            margin-bottom: 32px;
+        }
+
+        .greeting {
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 4px;
+        }
+
+        .greeting span {
+            color: var(--green);
+        }
+
+        .greeting-sub {
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+        }
+
+        .stat-card:hover {
+            border-color: var(--green);
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.1);
+        }
+
+        .card-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            margin-bottom: 8px;
+        }
+
+        .card-value {
+            font-family: 'Poppins', sans-serif;
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--green);
+        }
+
+        .section {
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-link {
+            font-size: 12px;
+            color: var(--green);
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .section-link:hover {
+            text-decoration: underline;
+        }
+
+        .ride-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 14px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 12px;
+            transition: all 0.2s;
+        }
+
+        .ride-card:hover {
+            border-color: var(--green);
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.1);
+        }
+
+        .ride-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, #fbbf24, #f97316);
+        }
+
+        .ride-info {
+            flex: 1;
+        }
+
+        .ride-name {
+            font-weight: 700;
+            color: var(--dark);
+            font-size: 14px;
+        }
+
+        .ride-meta {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 2px;
+        }
+
+        .ride-badge {
+            background: #f0fdf4;
+            color: var(--green-dark);
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* ─── FIND MATCHES ─── */
+        .search-box {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 24px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .search-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 14px;
+            color: var(--dark);
+        }
+
+        .search-input::placeholder {
+            color: var(--muted);
+        }
+
+        .filters {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .filter-tag {
+            padding: 8px 16px;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--slate);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-tag:hover {
+            border-color: var(--green);
+            background: rgba(34, 197, 94, 0.05);
+        }
+
+        .filter-tag.active {
+            background: rgba(34, 197, 94, 0.1);
+            border-color: var(--green);
+            color: var(--green);
+        }
+
+        /* ─── LOCATION PICKER ─── */
+        .location-picker {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 24px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .location-input {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .location-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .location-field {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 10px 12px;
+            font-size: 13px;
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            background: var(--card);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .location-field:hover {
+            border-color: var(--green);
+            background: var(--white);
+        }
+
+        .location-field:focus {
+            outline: none;
+            border-color: var(--green);
+            box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.1);
+        }
+
+        .location-swap {
+            display: flex;
+            align-items: flex-end;
+            padding-bottom: 1px;
+        }
+
+        .location-swap button {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            transition: all 0.2s;
+        }
+
+        .location-swap button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+        }
+
+        .matches-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        .match-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 16px;
+            transition: all 0.2s;
+        }
+
+        .match-card:hover {
+            border-color: var(--green);
+            box-shadow: 0 6px 20px rgba(34, 197, 94, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .match-header {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+            align-items: center;
+        }
+
+        .match-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+        }
+
+        .match-details {
+            flex: 1;
+        }
+
+        .match-name {
+            font-weight: 700;
+            color: var(--dark);
+            font-size: 15px;
+        }
+
+        .match-meta {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 2px;
+        }
+
+        .match-score {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid var(--green);
+            border-radius: 8px;
+            padding: 4px 10px;
+            text-align: center;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--green);
+            flex-shrink: 0;
+            white-space: nowrap;
+        }
+
+        .match-tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+
+        .tag {
+            background: #f0fdf4;
+            color: var(--green-dark);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .match-action {
+            display: flex;
+            gap: 8px;
+        }
+
+        .match-action button {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid var(--border);
+            background: var(--white);
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .match-action button.view-profile {
+            border-color: var(--green);
+            color: var(--green);
+        }
+
+        .match-action button.view-profile:hover {
+            background: rgba(34, 197, 94, 0.1);
+        }
+
+        .match-action button.message {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+            border-color: var(--green);
+        }
+
+        .match-action button.message:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2);
+        }
+
+        /* ─── PROFILE VIEW ─── */
+        .profile-hero {
+            background: linear-gradient(160deg, #f0fdf4, #f0f9ff);
+            border-radius: 14px;
+            padding: 32px 24px;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            margin: 0 auto 16px;
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            border: 3px solid rgba(34, 197, 94, 0.2);
+        }
+
+        .profile-name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 4px;
+        }
+
+        .profile-major {
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 16px;
+        }
+
+        .profile-badge {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid var(--green);
+            border-radius: 20px;
+            padding: 8px 16px;
+            color: var(--green);
+            font-size: 12px;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .detail-section {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .detail-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .detail-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .detail-icon {
+            font-size: 20px;
+            margin-top: 2px;
+        }
+
+        .detail-content {
+            flex: 1;
+        }
+
+        .detail-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .detail-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--dark);
+            margin-top: 2px;
+        }
+
+        /* ─── MESSAGES ─── */
+        .message-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .message-item {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 12px;
+            display: flex;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .message-item:hover {
+            border-color: var(--green);
+            box-shadow: 0 2px 8px rgba(34, 197, 94, 0.1);
+        }
+
+        .message-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, #fbbf24, #f97316);
+            position: relative;
+        }
+
+        .online-indicator {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 12px;
+            height: 12px;
+            background: var(--green);
+            border: 2px solid white;
+            border-radius: 50%;
+        }
+
+        .message-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .message-name {
+            font-weight: 700;
+            color: var(--dark);
+            font-size: 14px;
+        }
+
+        .message-preview {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .message-time {
+            font-size: 11px;
+            color: var(--muted);
+            text-align: right;
+        }
+
+        .unread-badge {
+            background: var(--green);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        /* ─── CHAT PAGE ─── */
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            height: calc(100vh - 100px);
+            background: var(--white);
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .chat-header-back {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
+            color: var(--slate);
+            padding: 4px 8px;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .chat-header-back:hover {
+            background: var(--card);
+        }
+
+        .chat-header-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, #fbbf24, #f97316);
+            position: relative;
+        }
+
+        .chat-header-info {
+            flex: 1;
+        }
+
+        .chat-header-name {
+            font-weight: 700;
+            color: var(--dark);
+            font-size: 15px;
+        }
+
+        .chat-header-status {
+            font-size: 11px;
+            color: var(--green);
+            font-weight: 600;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .message-group {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 4px;
+            align-items: flex-end;
+        }
+
+        .message-group.me {
+            flex-direction: row-reverse;
+        }
+
+        .chat-bubble {
+            padding: 10px 14px;
+            border-radius: 12px;
+            max-width: 70%;
+            word-wrap: break-word;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .message-group.them .chat-bubble {
+            background: var(--card);
+            color: var(--dark);
+            border: 1px solid var(--border);
+            border-bottom-left-radius: 2px;
+        }
+
+        .message-group.me .chat-bubble {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+            border-bottom-right-radius: 2px;
+        }
+
+        .message-time-label {
+            text-align: center;
+            font-size: 11px;
+            color: var(--muted);
+            margin: 12px 0;
+        }
+
+        .chat-input-area {
+            padding: 16px 20px;
+            background: var(--white);
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+        }
+
+        .chat-input-field {
+            flex: 1;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 10px 12px;
+            font-size: 13px;
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            resize: none;
+            max-height: 100px;
+        }
+
+        .chat-input-field:focus {
+            outline: none;
+            border-color: var(--green);
+            box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.1);
+        }
+
+        .chat-send-btn {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+            flex-shrink: 0;
+            transition: all 0.2s;
+            color: white;
+        }
+
+        .chat-send-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+        }
+
+        .chat-send-btn:active {
+            transform: translateY(0);
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 768px) {
+            .container {
+                padding: 16px;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 12px;
+                align-items: flex-start;
+            }
+
+            .header-left {
+                width: 100%;
+            }
+
+            .header-right {
+                width: 100%;
+                justify-content: flex-end;
+            }
+
+            .splash {
+                padding: 40px 20px;
+            }
+
+            .splash-title {
+                font-size: 28px;
+            }
+
+            .splash-stats {
+                gap: 20px;
+            }
+
+            .matches-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header id="app-header" class="hidden">
+        <div class="header-left">
+            <div class="logo">Campus<span>Ride</span></div>
+            <div class="nav-buttons">
+                <button class="nav-btn active" onclick="showPage('dashboard')">Dashboard</button>
+                <button class="nav-btn" onclick="showPage('matches')">Find Matches</button>
+                <button class="nav-btn" onclick="showPage('messages')">Messages</button>
+                <button class="nav-btn" onclick="showPage('my-rides')">My Rides</button>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="avatar" id="user-avatar" onclick="logoutUser()" title="Logout">AJ</div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- LOGIN PAGE -->
+        <div id="login" class="page active">
+            <div class="login-wrap">
+                <div class="login-card">
+                    <div class="login-hero">
+                        <div class="login-title">Campus<span>Ride</span></div>
+                        <div class="login-sub">Sign in with your school account to start matching rides.</div>
+                    </div>
+                    <form class="login-form" onsubmit="handleLogin(event)">
+                        <div id="login-error" class="login-error"></div>
+                        <div id="login-success" class="login-success"></div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="login-name">Full Name</label>
+                            <input id="login-name" class="form-input" type="text" placeholder="Alex Johnson" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="login-email">School Email</label>
+                            <input id="login-email" class="form-input" type="email" placeholder="you@cpp.edu" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="login-password">Password</label>
+                            <input id="login-password" class="form-input" type="password" placeholder="Enter password" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="login-role">I am signing in as</label>
+                            <select id="login-role" class="form-select" required>
+                                <option value="">Select role</option>
+                                <option value="driver">Driver</option>
+                                <option value="rider">Rider</option>
+                                <option value="both">Both</option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <label class="remember">
+                                <input type="checkbox" id="remember-me">
+                                Remember me
+                            </label>
+                            <span style="font-size:12px;color:var(--muted);">Demo login enabled</span>
+                        </div>
+
+                        <button class="login-btn" type="submit">Sign In</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- SPLASH PAGE -->
+        <div id="splash" class="page active">
+            <div class="splash">
+                <div class="splash-icon">🚗</div>
+                <h1 class="splash-title">Welcome to <span>CampusRide</span></h1>
+                <p class="splash-subtitle">Find reliable carpools to campus, save money, and build your community</p>
+                
+                <div class="splash-stats">
+                    <div class="stat-pill">
+                        <div class="stat-num">2,340+</div>
+                        <div class="stat-label">Active Students</div>
+                    </div>
+                    <div class="stat-pill">
+                        <div class="stat-num">$540K</div>
+                        <div class="stat-label">Saved Annually</div>
+                    </div>
+                    <div class="stat-pill">
+                        <div class="stat-num">94%</div>
+                        <div class="stat-label">Match Rate</div>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" onclick="showPage('dashboard')">Get Started</button>
+                <button class="btn btn-secondary">Learn More</button>
+            </div>
+        </div>
+
+        <!-- DASHBOARD -->
+        <div id="dashboard" class="page">
+            <div class="greeting-section">
+                <div class="greeting">Welcome back, <span>Alex</span>! 👋</div>
+                <div class="greeting-sub">Looking good for your morning ride</div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="card-title">This Month</div>
+                    <div class="card-value" style="color: var(--green);">$240</div>
+                    <div class="stat-label" style="margin-top: 8px;">Saved</div>
+                </div>
+                <div class="stat-card">
+                    <div class="card-title">Total Trips</div>
+                    <div class="card-value" style="color: var(--blue);">18</div>
+                    <div class="stat-label" style="margin-top: 8px;">Completed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="card-title">Your Rating</div>
+                    <div class="card-value" style="color: var(--yellow); font-size: 20px;">⭐ 4.9</div>
+                    <div class="stat-label" style="margin-top: 8px;">Out of 5</div>
+                </div>
+                <div class="stat-card">
+                    <div class="card-title">CO₂ Saved</div>
+                    <div class="card-value" style="color: var(--green);">420</div>
+                    <div class="stat-label" style="margin-top: 8px;">Kilograms</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    Next Scheduled Ride
+                    <a class="section-link" onclick="showPage('my-rides')">View All →</a>
+                </div>
+                <div class="ride-card">
+                    <div class="ride-avatar">👩‍🎓</div>
+                    <div class="ride-info">
+                        <div class="ride-name">Jordan Chen</div>
+                        <div class="ride-meta">Monday, 7:40 AM • Diamond Bar → Campus</div>
+                    </div>
+                    <div class="ride-badge">Confirmed</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Recent Activity</div>
+                <div class="ride-card" style="margin-bottom: 8px;">
+                    <div class="ride-avatar">👨‍💼</div>
+                    <div class="ride-info">
+                        <div class="ride-name">New match found</div>
+                        <div class="ride-meta">Jordan matches 94% of your preferences</div>
+                    </div>
+                </div>
+                <div class="ride-card" style="margin-bottom: 8px;">
+                    <div class="ride-avatar">✅</div>
+                    <div class="ride-info">
+                        <div class="ride-name">Ride completed</div>
+                        <div class="ride-meta">Rode with Jamie • 2 hours ago</div>
+                    </div>
+                </div>
+                <div class="ride-card">
+                    <div class="ride-avatar">💬</div>
+                    <div class="ride-info">
+                        <div class="ride-name">New message</div>
+                        <div class="ride-meta">Jordan: "See you Monday morning!"</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FIND MATCHES -->
+        <div id="matches" class="page">
+            <h2 style="font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 800; color: var(--dark); margin-bottom: 24px;">Find Your Perfect Match</h2>
+            
+            <div class="search-box">
+                <span>🔍</span>
+                <input type="text" id="search-input" class="search-input" placeholder="Search by location, schedule...">
+            </div>
+
+            <!-- Location Picker -->
+            <div class="location-picker">
+                <div class="location-input">
+                    <label class="location-label">🚗 Start Location</label>
+                    <select id="start-location" class="location-field" onchange="updateLocationFilter()">
+                        <option value="">All Locations</option>
+                        <option value="Diamond Bar">Diamond Bar</option>
+                        <option value="Walnut">Walnut</option>
+                        <option value="Chino">Chino</option>
+                        <option value="Ontario">Ontario</option>
+                        <option value="Fontana">Fontana</option>
+                    </select>
+                </div>
+                <div class="location-input">
+                    <label class="location-label">Campus</label>
+                    <div class="location-field" style="display: flex; align-items: center; cursor: default; background: rgba(34, 197, 94, 0.08); border-color: var(--green); color: var(--green); font-weight: 600;">🎩 Cal Poly Pomona</div>
+                </div>
+            </div>
+
+            <div class="filters">
+                <div class="filter-tag active" data-filter="all" onclick="filterMatches('all')">All</div>
+                <div class="filter-tag" data-filter="mwf" onclick="filterMatches('mwf')">MWF Schedule</div>
+                <div class="filter-tag" data-filter="verified" onclick="filterMatches('verified')">Verified Students</div>
+                <div class="filter-tag" data-filter="rating" onclick="filterMatches('rating')">4+ Stars</div>
+                <div class="filter-tag" data-filter="neighborhood" onclick="filterMatches('neighborhood')">Same Neighborhood</div>
+            </div>
+
+            <div class="matches-grid">
+                <div class="match-card">
+                    <div class="match-header">
+                        <div class="match-avatar">👩‍🎓</div>
+                        <div class="match-details">
+                            <div class="match-name">Jordan Chen</div>
+                            <div class="match-meta">Computer Science • Junior</div>
+                        </div>
+                        <div class="match-score">94%</div>
+                    </div>
+                    <div class="match-tags">
+                        <span class="tag">Same Hours</span>
+                        <span class="tag">Verified</span>
+                        <span class="tag">4.8⭐</span>
+                    </div>
+                    <div class="match-action">
+                        <button class="view-profile">View Profile</button>
+                        <button class="message">Message</button>
+                    </div>
+                </div>
+
+                <div class="match-card">
+                    <div class="match-header">
+                        <div class="match-avatar">👨‍🏫</div>
+                        <div class="match-details">
+                            <div class="match-name">Marcus Johnson</div>
+                            <div class="match-meta">Engineering • Senior</div>
+                        </div>
+                        <div class="match-score">82%</div>
+                    </div>
+                    <div class="match-tags">
+                        <span class="tag">Similar Route</span>
+                        <span class="tag">Verified</span>
+                        <span class="tag">4.6⭐</span>
+                    </div>
+                    <div class="match-action">
+                        <button class="view-profile">View Profile</button>
+                        <button class="message">Message</button>
+                    </div>
+                </div>
+
+                <div class="match-card">
+                    <div class="match-header">
+                        <div class="match-avatar">👩‍🰳</div>
+                        <div class="match-details">
+                            <div class="match-name">Sophia Rodriguez</div>
+                            <div class="match-meta">Business • Sophomore</div>
+                        </div>
+                        <div class="match-score">78%</div>
+                    </div>
+                    <div class="match-tags">
+                        <span class="tag">TTh Schedule</span>
+                        <span class="tag">Verified</span>
+                        <span class="tag">4.7⭐</span>
+                    </div>
+                    <div class="match-action">
+                        <button class="view-profile">View Profile</button>
+                        <button class="message">Message</button>
+                    </div>
+                </div>
+
+                <div class="match-card">
+                    <div class="match-header">
+                        <div class="match-avatar">👨‍💻</div>
+                        <div class="match-details">
+                            <div class="match-name">David Park</div>
+                            <div class="match-meta">Data Science • Junior</div>
+                        </div>
+                        <div class="match-score">76%</div>
+                    </div>
+                    <div class="match-tags">
+                        <span class="tag">MWF Schedule</span>
+                        <span class="tag">Verified</span>
+                        <span class="tag">4.5⭐</span>
+                    </div>
+                    <div class="match-action">
+                        <button class="view-profile">View Profile</button>
+                        <button class="message">Message</button>
+                    </div>
+                </div>
+
+                <div class="match-card">
+                    <div class="match-header">
+                        <div class="match-avatar">👩‍🎨</div>
+                        <div class="match-details">
+                            <div class="match-name">Emily Zhang</div>
+                            <div class="match-meta">Art History • Freshman</div>
+                        </div>
+                        <div class="match-score">71%</div>
+                    </div>
+                    <div class="match-tags">
+                        <span class="tag">Same Dorm</span>
+                        <span class="tag">Verified</span>
+                        <span class="tag">4.9⭐</span>
+                    </div>
+                    <div class="match-action">
+                        <button class="view-profile">View Profile</button>
+                        <button class="message">Message</button>
+                    </div>
+                </div>
+
+                <div class="match-card">
+                    <div class="match-header">
+                        <div class="match-avatar">👨‍🏥</div>
+                        <div class="match-details">
+                            <div class="match-name">James Wilson</div>
+                            <div class="match-meta">Pre-Med • Sophomore</div>
+                        </div>
+                        <div class="match-score">68%</div>
+                    </div>
+                    <div class="match-tags">
+                        <span class="tag">Early Morning</span>
+                        <span class="tag">Verified</span>
+                        <span class="tag">4.4⭐</span>
+                    </div>
+                    <div class="match-action">
+                        <button class="view-profile">View Profile</button>
+                        <button class="message">Message</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROFILE DETAIL (shown when clicking View Profile) -->
+        <div id="profile" class="page">
+            <button class="nav-btn" onclick="goBack()" style="margin-bottom: 20px;">← Back</button>
+            
+            <div class="profile-hero">
+                <div class="profile-avatar">👩‍🎓</div>
+                <div class="profile-name">Jordan Chen</div>
+                <div class="profile-major">Computer Science • Junior at Cal Poly Pomona</div>
+                <div class="profile-badge">⭐ 4.8 Rating (24 reviews)</div>
+            </div>
+
+            <div class="detail-section">
+                <div class="detail-row">
+                    <div class="detail-icon">📍</div>
+                    <div class="detail-content">
+                        <div class="detail-label">Home Location</div>
+                        <div class="detail-value">Diamond Bar, CA</div>
+                    </div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-icon">📅</div>
+                    <div class="detail-content">
+                        <div class="detail-label">Schedule</div>
+                        <div class="detail-value">MWF: 8:00 AM - 5:00 PM</div>
+                    </div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-icon">🚗</div>
+                    <div class="detail-content">
+                        <div class="detail-label">Driving</div>
+                        <div class="detail-value">Driver • 2-3 seats available</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="detail-section">
+                <div class="detail-row">
+                    <div class="detail-icon">💬</div>
+                    <div class="detail-content">
+                        <div class="detail-label">Bio</div>
+                        <div class="detail-value">Friendly and punctual driver! Love good music and conversations on the drive.</div>
+                    </div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-icon">🎵</div>
+                    <div class="detail-content">
+                        <div class="detail-label">Preferences</div>
+                        <div class="detail-value">K-pop, Indie, Jazz • No smoking • Coffee breaks OK</div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 12px; margin-top: 24px;">
+                <button class="btn btn-primary" onclick="showPage('messages')" style="flex: 1; margin: 0;">Send Message</button>
+                <button class="btn btn-secondary" style="flex: 1;">Report Profile</button>
+            </div>
+        </div>
+
+        <!-- MESSAGES -->
+        <div id="messages" class="page">
+            <h2 style="font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 800; color: var(--dark); margin-bottom: 24px;">Messages</h2>
+            
+            <div class="message-list">
+                <div class="message-item">
+                    <div class="message-avatar">
+                        👩‍🎓
+                        <div class="online-indicator"></div>
+                    </div>
+                    <div class="message-info">
+                        <div class="message-name">Jordan Chen</div>
+                        <div class="message-preview">See you Monday morning at 7:40!</div>
+                    </div>
+                    <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 8px;">
+                        <div class="message-time">2 min ago</div>
+                        <div class="unread-badge">2</div>
+                    </div>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-avatar">
+                        👨‍💼
+                    </div>
+                    <div class="message-info">
+                        <div class="message-name">Marcus Johnson</div>
+                        <div class="message-preview">Thanks for the ride yesterday!</div>
+                    </div>
+                    <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 8px;">
+                        <div class="message-time">1 hour ago</div>
+                    </div>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-avatar">
+                        👩‍🰳
+                    </div>
+                    <div class="message-info">
+                        <div class="message-name">Sophia Rodriguez</div>
+                        <div class="message-preview">Are you available for Thursday morning?</div>
+                    </div>
+                    <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 8px;">
+                        <div class="message-time">Yesterday</div>
+                    </div>
+                </div>
+
+                <div class="message-item">
+                    <div class="message-avatar">
+                        👨‍💻
+                    </div>
+                    <div class="message-info">
+                        <div class="message-name">David Park</div>
+                        <div class="message-preview">Great match! Let's confirm the first ride</div>
+                    </div>
+                    <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 8px;">
+                        <div class="message-time">2 days ago</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CHAT PAGE -->
+        <div id="chat" class="page">
+            <div class="chat-container">
+                <div class="chat-header">
+                    <button class="chat-header-back" onclick="showPage('messages')">←</button>
+                    <div class="chat-header-avatar" id="chat-avatar">👩‍🎓</div>
+                    <div class="chat-header-info">
+                        <div class="chat-header-name" id="chat-name">Jordan Chen</div>
+                        <div class="chat-header-status">Online</div>
+                    </div>
+                </div>
+                
+                <div class="chat-messages" id="chat-messages">
+                    <!-- Messages will be inserted here -->
+                </div>
+                
+                <div class="chat-input-area">
+                    <textarea id="chat-input" class="chat-input-field" placeholder="Type your message..." rows="1"></textarea>
+                    <button class="chat-send-btn" onclick="sendMessage()">➤</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MY RIDES -->
+        <div id="my-rides" class="page">
+            <h2 style="font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 800; color: var(--dark); margin-bottom: 24px;">My Carpools</h2>
+            
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+                <div class="ride-card" style="margin: 0;">
+                    <div class="ride-avatar">👩‍🎓</div>
+                    <div class="ride-info" style="flex: 1;">
+                        <div class="ride-name">Jordan Chen</div>
+                        <div class="ride-meta">Monday • 7:40 AM - 5:00 PM</div>
+                        <div style="margin-top: 8px; font-size: 12px; color: var(--muted);">📍 Pickup: Starbucks on Diamond Bar Blvd</div>
+                    </div>
+                    <div class="ride-badge">Confirmed</div>
+                </div>
+
+                <div class="ride-card" style="margin: 0;">
+                    <div class="ride-avatar">👨‍💼</div>
+                    <div class="ride-info" style="flex: 1;">
+                        <div class="ride-name">Marcus Johnson</div>
+                        <div class="ride-meta">Wednesday • 8:00 AM - 4:30 PM</div>
+                        <div style="margin-top: 8px; font-size: 12px; color: var(--muted);">📍 Pickup: Campus West Parking Lot</div>
+                    </div>
+                    <div class="ride-badge" style="background: #fef3c7; color: #b45309;">Pending</div>
+                </div>
+
+                <div class="ride-card" style="margin: 0;">
+                    <div class="ride-avatar">👩‍🰳</div>
+                    <div class="ride-info" style="flex: 1;">
+                        <div class="ride-name">Sophia Rodriguez (Rider)</div>
+                        <div class="ride-meta">Friday • 7:30 AM - 3:00 PM</div>
+                        <div style="margin-top: 8px; font-size: 12px; color: var(--muted);">📍 Pickup: Your Home • Pickup Time: 7:25 AM</div>
+                    </div>
+                    <div class="ride-badge">Active</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Match data for search and filtering
+        const matchesData = [
+            { id: 1, name: 'Jordan Chen', major: 'Computer Science', year: 'Junior', score: 94, tags: ['Same Hours', 'Verified', '4.8⭐'], schedule: 'mwf', rating: 4.8, neighborhood: true, avatar: '👩‍🎓', location: 'Diamond Bar' },
+            { id: 2, name: 'Marcus Johnson', major: 'Engineering', year: 'Senior', score: 82, tags: ['Similar Route', 'Verified', '4.6⭐'], schedule: 'other', rating: 4.6, neighborhood: false, avatar: '👨‍💼', location: 'Walnut' },
+            { id: 3, name: 'Sophia Rodriguez', major: 'Business', year: 'Sophomore', score: 78, tags: ['TTh Schedule', 'Verified', '4.7⭐'], schedule: 'tth', rating: 4.7, neighborhood: false, avatar: '👩‍🰳', location: 'Chino' },
+            { id: 4, name: 'David Park', major: 'Data Science', year: 'Junior', score: 76, tags: ['MWF Schedule', 'Verified', '4.5⭐'], schedule: 'mwf', rating: 4.5, neighborhood: false, avatar: '👨‍💻', location: 'Diamond Bar' },
+            { id: 5, name: 'Emily Zhang', major: 'Art History', year: 'Freshman', score: 71, tags: ['Same Dorm', 'Verified', '4.9⭐'], schedule: 'mwf', rating: 4.9, neighborhood: true, avatar: '👩‍🎨', location: 'Ontario' },
+            { id: 6, name: 'James Wilson', major: 'Pre-Med', year: 'Sophomore', score: 68, tags: ['Early Morning', 'Verified', '4.4⭐'], schedule: 'mwf', rating: 4.4, neighborhood: false, avatar: '👨‍🏥', location: 'Fontana' }
+        ];
+
+        // Conversation data
+        const conversations = {
+            1: {
+                name: 'Jordan Chen',
+                avatar: '👩‍🎓',
+                messages: [
+                    { type: 'them', text: 'Hey! I saw your profile and we have the same schedule', time: '10:30 AM' },
+                    { type: 'them', text: 'MWF 8-5, right?', time: '10:31 AM' },
+                    { type: 'me', text: 'Yes! That would be perfect for my commute', time: '10:35 AM' },
+                    { type: 'them', text: 'Cool! When do you usually leave campus?', time: '10:40 AM' },
+                    { type: 'me', text: 'Around 5:00 PM. You?', time: '10:42 AM' },
+                    { type: 'them', text: 'Same here! Let\'s meet at Starbucks on Monday at 7:40 AM', time: '10:45 AM' },
+                    { type: 'me', text: 'Sounds good! See you Monday 🚗', time: '10:47 AM' },
+                    { type: 'them', text: 'See you Monday morning at 7:40!', time: '2 min ago' }
+                ]
+            },
+            2: {
+                name: 'Marcus Johnson',
+                avatar: '👨‍💼',
+                messages: [
+                    { type: 'them', text: 'Thanks for the ride yesterday!', time: '1 hour ago' },
+                    { type: 'me', text: 'No problem! Anytime', time: '58 min ago' }
+                ]
+            },
+            3: {
+                name: 'Sophia Rodriguez',
+                avatar: '👩‍🰳',
+                messages: [
+                    { type: 'them', text: 'Are you available for Thursday morning?', time: 'Yesterday' }
+                ]
+            },
+            4: {
+                name: 'David Park',
+                avatar: '👨‍💻',
+                messages: [
+                    { type: 'them', text: 'Great match! Let\'s confirm the first ride', time: '2 days ago' }
+                ]
+            }
+        };
+
+        let isLoggedIn = false;
+        let currentConversationId = null;
+        let currentFilter = 'all';
+        let searchTerm = '';
+        let selectedStartLocation = '';
+
+        function setAppShellVisibility() {
+            const header = document.getElementById('app-header');
+            const currentPage = document.querySelector('.page.active');
+            const shouldHide = !isLoggedIn || (currentPage && currentPage.id === 'login');
+            header.classList.toggle('hidden', shouldHide);
+        }
+
+        function getInitials(name) {
+            return name
+                .split(' ')
+                .filter(Boolean)
+                .slice(0, 2)
+                .map(part => part[0].toUpperCase())
+                .join('');
+        }
+
+        function showLoginError(message) {
+            const err = document.getElementById('login-error');
+            const ok = document.getElementById('login-success');
+            ok.style.display = 'none';
+            err.textContent = message;
+            err.style.display = 'block';
+        }
+
+        function showLoginSuccess(message) {
+            const err = document.getElementById('login-error');
+            const ok = document.getElementById('login-success');
+            err.style.display = 'none';
+            ok.textContent = message;
+            ok.style.display = 'block';
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('login-name').value.trim();
+            const email = document.getElementById('login-email').value.trim();
+            const password = document.getElementById('login-password').value;
+            const role = document.getElementById('login-role').value;
+            const remember = document.getElementById('remember-me').checked;
+
+            if (!name || !email || !password || !role) {
+                showLoginError('Please complete all fields.');
+                return;
+            }
+
+            if (!email.toLowerCase().endsWith('@cpp.edu')) {
+                showLoginError('Please use a valid @cpp.edu email address.');
+                return;
+            }
+
+            if (password.length < 6) {
+                showLoginError('Password must be at least 6 characters.');
+                return;
+            }
+
+            isLoggedIn = true;
+            document.getElementById('user-avatar').textContent = getInitials(name) || 'CR';
+
+            if (remember) {
+                localStorage.setItem('campusRideUserName', name);
+                localStorage.setItem('campusRideUserEmail', email);
+            } else {
+                localStorage.removeItem('campusRideUserName');
+                localStorage.removeItem('campusRideUserEmail');
+            }
+
+            showLoginSuccess('Login successful. Redirecting to Dashboard...');
+            setTimeout(() => {
+                showPage('dashboard');
+            }, 450);
+        }
+
+        function logoutUser() {
+            isLoggedIn = false;
+            document.getElementById('login-password').value = '';
+            document.getElementById('login-error').style.display = 'none';
+            document.getElementById('login-success').style.display = 'none';
+            showPage('login');
+        }
+
+        function filterMatches(filterType) {
+            currentFilter = filterType;
+            
+            // Update active filter button
+            document.querySelectorAll('.filter-tag').forEach(tag => {
+                tag.classList.remove('active');
+                if (tag.getAttribute('data-filter') === filterType) {
+                    tag.classList.add('active');
+                }
+            });
+
+            updateMatchDisplay();
+        }
+
+        function updateLocationFilter() {
+            selectedStartLocation = document.getElementById('start-location').value;
+            updateMatchDisplay();
+        }
+
+        function updateMatchDisplay() {
+            const matchCards = document.querySelectorAll('.match-card');
+            let visibleCount = 0;
+
+            matchCards.forEach((card, index) => {
+                const match = matchesData[index];
+                if (!match) return;
+
+                let shouldShow = true;
+
+                // Apply search filter
+                if (searchTerm) {
+                    const searchLower = searchTerm.toLowerCase();
+                    shouldShow = match.name.toLowerCase().includes(searchLower) ||
+                                match.major.toLowerCase().includes(searchLower) ||
+                                match.year.toLowerCase().includes(searchLower);
+                }
+
+                // Apply location filter
+                if (shouldShow && selectedStartLocation) {
+                    shouldShow = match.location === selectedStartLocation;
+                }
+
+                // Apply category filter
+                if (shouldShow && currentFilter !== 'all') {
+                    switch(currentFilter) {
+                        case 'mwf':
+                            shouldShow = match.schedule === 'mwf';
+                            break;
+                        case 'verified':
+                            shouldShow = match.tags.includes('Verified');
+                            break;
+                        case 'rating':
+                            shouldShow = match.rating >= 4;
+                            break;
+                        case 'neighborhood':
+                            shouldShow = match.neighborhood;
+                            break;
+                    }
+                }
+
+                card.style.display = shouldShow ? 'block' : 'none';
+                if (shouldShow) visibleCount++;
+            });
+
+            // Show no results message if needed
+            const grid = document.querySelector('.matches-grid');
+            let noResultsMsg = grid.querySelector('.no-results-msg');
+            if (visibleCount === 0) {
+                if (!noResultsMsg) {
+                    noResultsMsg = document.createElement('div');
+                    noResultsMsg.className = 'no-results-msg';
+                    noResultsMsg.style.cssText = 'grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--muted); font-size: 16px;';
+                    noResultsMsg.textContent = 'No matches found. Try adjusting your search or filters.';
+                    grid.appendChild(noResultsMsg);
+                }
+            } else if (noResultsMsg) {
+                noResultsMsg.remove();
+            }
+        }
+
+        function openChat(conversationId) {
+            currentConversationId = conversationId;
+            const conv = conversations[conversationId];
+            
+            if (!conv) return;
+            
+            // Update chat header
+            document.getElementById('chat-name').textContent = conv.name;
+            document.getElementById('chat-avatar').textContent = conv.avatar;
+            
+            // Load messages
+            const messagesContainer = document.getElementById('chat-messages');
+            messagesContainer.innerHTML = '';
+            
+            conv.messages.forEach((msg, index) => {
+                const msgGroup = document.createElement('div');
+                msgGroup.className = `message-group ${msg.type}`;
+                
+                const bubble = document.createElement('div');
+                bubble.className = 'chat-bubble';
+                bubble.textContent = msg.text;
+                
+                msgGroup.appendChild(bubble);
+                messagesContainer.appendChild(msgGroup);
+            });
+            
+            // Scroll to bottom and focus input
+            setTimeout(() => {
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                document.getElementById('chat-input').focus();
+            }, 0);
+            
+            showPage('chat');
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            
+            if (!message || !currentConversationId) return;
+            
+            const conv = conversations[currentConversationId];
+            const messagesContainer = document.getElementById('chat-messages');
+            
+            // Add new message
+            const msgGroup = document.createElement('div');
+            msgGroup.className = 'message-group me';
+            
+            const bubble = document.createElement('div');
+            bubble.className = 'chat-bubble';
+            bubble.textContent = message;
+            
+            msgGroup.appendChild(bubble);
+            messagesContainer.appendChild(msgGroup);
+            
+            // Add to conversation data
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+            conv.messages.push({ type: 'me', text: message, time: timeStr });
+            
+            // Clear input and reset height
+            input.value = '';
+            input.style.height = 'auto';
+            
+            // Scroll to bottom
+            setTimeout(() => {
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }, 0);
+        }
+
+        // Auto-resize textarea
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatInput = document.getElementById('chat-input');
+            
+            if (chatInput) {
+                chatInput.addEventListener('input', function() {
+                    this.style.height = 'auto';
+                    this.style.height = Math.min(this.scrollHeight, 100) + 'px';
+                });
+                
+                chatInput.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        sendMessage();
+                    }
+                });
+            }
+            
+            // Search input handler
+            const searchInput = document.getElementById('search-input');
+            if (searchInput) {
+                searchInput.addEventListener('input', function(e) {
+                    searchTerm = e.target.value;
+                    updateMatchDisplay();
+                });
+            }
+
+            // Message item click handlers
+            document.querySelectorAll('.message-item').forEach((item, index) => {
+                item.addEventListener('click', function() {
+                    const conversationId = index + 1;
+                    openChat(conversationId);
+                });
+            });
+
+            // Match card view profile buttons
+            document.querySelectorAll('.match-card .view-profile').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    showPage('profile');
+                });
+            });
+        });
+
+        function showPage(pageId) {
+            if (!isLoggedIn && pageId !== 'login') {
+                pageId = 'login';
+            }
+
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // Show selected page
+            const page = document.getElementById(pageId);
+            if (page) {
+                page.classList.add('active');
+            }
+
+            // Update nav buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Handle specific page nav buttons
+            if (pageId === 'dashboard') {
+                document.querySelectorAll('.nav-btn')[0].classList.add('active');
+            } else if (pageId === 'matches') {
+                document.querySelectorAll('.nav-btn')[1].classList.add('active');
+            } else if (pageId === 'messages') {
+                document.querySelectorAll('.nav-btn')[2].classList.add('active');
+            } else if (pageId === 'my-rides') {
+                document.querySelectorAll('.nav-btn')[3].classList.add('active');
+            }
+
+            setAppShellVisibility();
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        function goBack() {
+            showPage('dashboard');
+        }
+
+        showPage('login');
+    </script>
+</body>
+</html>
