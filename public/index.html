@@ -40,42 +40,62 @@
     </header>
 
     <div class="container">
-        <!-- LOGIN PAGE -->
+        <!-- LOGIN / REGISTER PAGE -->
         <div id="login" class="page active">
             <div class="login-wrap">
                 <div class="login-card">
                     <div class="login-hero">
                         <div class="login-title">Campus<span>Ride</span></div>
-                        <div class="login-sub">Sign in with your school account to start matching rides.</div>
+                        <div class="login-sub">Sign in or create an account to start matching rides.</div>
                     </div>
-                    <form class="login-form" onsubmit="handleLogin(event)">
-                        <div id="login-error" class="login-error"></div>
-                        <div id="login-success" class="login-success"></div>
 
-                        <div class="form-group">
-                            <label class="form-label" for="login-name">Full Name</label>
-                            <input id="login-name" class="form-input" type="text" placeholder="Alex Johnson" required>
-                        </div>
+                    <!-- Tab buttons -->
+                    <div class="auth-tabs">
+                        <button class="auth-tab-btn active" onclick="switchAuthTab('login', this)">Sign In</button>
+                        <button class="auth-tab-btn" onclick="switchAuthTab('register', this)">Register</button>
+                    </div>
 
+                    <!-- Login Form -->
+                    <form id="login-form" class="login-form auth-form active" onsubmit="handleLogin(event)">
+                        <div id="login-message" class="auth-message"></div>
                         <div class="form-group">
                             <label class="form-label" for="login-email">School Email</label>
                             <input id="login-email" class="form-input" type="email" placeholder="you@cpp.edu" required>
                         </div>
-
                         <div class="form-group">
                             <label class="form-label" for="login-password">Password</label>
                             <input id="login-password" class="form-input" type="password" placeholder="Enter password" required>
                         </div>
-
                         <div class="form-row">
                             <label class="remember">
                                 <input type="checkbox" id="remember-me">
                                 Remember me
                             </label>
-                            <span style="font-size:12px;color:var(--muted);">Demo login enabled</span>
                         </div>
-
                         <button class="login-btn" type="submit">Sign In</button>
+                    </form>
+
+                    <!-- Registration Form -->
+                    <form id="register-form" class="login-form auth-form" onsubmit="handleRegister(event)">
+                         <div id="register-message" class="auth-message"></div>
+                        <div class="form-group">
+                            <label class="form-label" for="register-name">Full Name</label>
+                            <input id="register-name" class="form-input" type="text" placeholder="Alex Johnson" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="register-email">School Email</label>
+                            <input id="register-email" class="form-input" type="email" placeholder="you@cpp.edu" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="register-password">Password</label>
+                            <input id="register-password" class="form-input" type="password" placeholder="6+ characters" required>
+                        </div>
+                         <div class="form-group">
+                            <label class="remember">
+                                <input type="checkbox" id="register-is-driver"> Register as a driver?
+                            </label>
+                        </div>
+                        <button class="login-btn" type="submit">Create Account</button>
                     </form>
                 </div>
             </div>
@@ -834,7 +854,7 @@
                     </div>
                 </div>
 
-                <h3 style="font-size: 14px; margin-bottom: 12px; color: var(--dark);">Outgoing Requests</h3>
+                <h3 style="font-size: 14px; margin-bottom: 12px; color: var(--dark);">Outgoing Requests</h2>
                 <div class="ride-card" style="flex-direction: column; align-items: stretch; gap: 12px;">
                     <div style="display: flex; align-items: center; gap: 12px;">
                         <div class="ride-avatar" style="background: linear-gradient(135deg, #3b82f6, #6366f1);">👨‍💼</div>
