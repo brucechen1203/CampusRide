@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/brucechen1203/CampusRide#readme",
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "express": "^5.2.1",
     "sqlite3": "^6.0.1"
   }
