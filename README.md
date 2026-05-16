@@ -1,5 +1,7 @@
 # Campus Ride
 
+Team Members: Boyu Chen, Brendan Ha
+
 ### Description
 
 Campus Ride is a campus ride-sharing platform designed to provide a convenient, safe, and affordable transportation solution for students and faculty. This application allows users to register as either a driver or a passenger. Drivers can post their trip information, including departure location, destination, departure time, and the number of available seats. Passengers can browse available trips and book a seat, simplifying commutes and travel within the campus.
