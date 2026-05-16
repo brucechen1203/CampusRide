@@ -310,21 +310,21 @@
             display: none;
         }
 
-        .login-btn {
-            width: 100%;
-            border: none;
-            border-radius: 12px;
-            padding: 12px;
-            color: var(--white);
-            font-size: 14px;
-            font-weight: 700;
-            font-family: 'Inter', sans-serif;
-            cursor: pointer;
-            background: linear-gradient(135deg, #22c55e, #16a34a);
-            box-shadow: 0 8px 22px rgba(34, 197, 94, 0.28);
-        }
+.login-btn, .form-container button {
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    padding: 12px;
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    box-shadow: 0 8px 22px rgba(34, 197, 94, 0.28);
+}
 
-        .login-btn:hover {
+.login-btn:hover, .form-container button:hover {
             transform: translateY(-1px);
         }
 
@@ -1751,37 +1751,17 @@
             box-sizing: border-box;
         }
 
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 15px;
-            margin: 8px 0;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-        }
+.form-container button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
 
-        button:hover {
-            opacity: 0.8;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .toggle-link {
-            text-align: center;
-            margin-top: 15px;
-        }
-
-        /* Styles for Login/Register Tabs */
-        .auth-tabs {
-            display: flex;
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 24px;
-        }
-
-        .auth-tab-btn {
+.form-container button:hover {
             flex: 1;
             padding: 12px;
             background: none;

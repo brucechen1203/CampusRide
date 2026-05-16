@@ -85,32 +85,63 @@ async function handleRegister(event) {
     }
 }
 
-function handleLogin(event) {
+async function handleLogin(event) {
     event.preventDefault();
     const email = document.getElementById('login-email').value.trim();
     const password = document.getElementById('login-password').value;
     const messageDiv = document.getElementById('login-message');
     
-    // Basic validation
+    // Reset message style and content
+    messageDiv.className = 'auth-message';
+    messageDiv.textContent = '';
+
+    // Basic frontend validation
     if (!email || !password) {
-        messageDiv.className = 'auth-message error';
+        messageDiv.classList.add('error');
         messageDiv.textContent = 'Please enter both email and password.';
         return;
     }
-    
-    // NOTE: This is still demo logic. We will replace this with a real API call next.
-    if (email.toLowerCase().endsWith('@cpp.edu')) {
-        isLoggedIn = true;
-        // Mock user data population
-        const name = "Alex Johnson"; // Placeholder name
-        document.getElementById('user-avatar').textContent = getInitials(name) || 'CR';
-        document.getElementById('greeting-name').textContent = name.split(' ')[0];
-        document.getElementById('dropdown-name').textContent = name;
-        document.getElementById('dropdown-email').textContent = email;
-        showPage('dashboard');
-    } else {
+
+    try {
+        const response = await fetch('/api/users/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password }),
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            // --- SUCCESSFUL LOGIN ---
+            messageDiv.classList.add('success');
+            messageDiv.textContent = result.message;
+            
+            isLoggedIn = true;
+            
+            // Populate user info into the UI from the server's response
+            const user = result.user;
+            if (user) {
+                document.getElementById('user-avatar').textContent = getInitials(user.name) || 'CR';
+                document.getElementById('greeting-name').textContent = user.name.split(' ')[0];
+                document.getElementById('dropdown-name').textContent = user.name;
+                document.getElementById('dropdown-email').textContent = user.email;
+            }
+
+            // Redirect to dashboard after a short delay
+            setTimeout(() => {
+                showPage('dashboard');
+            }, 1000);
+
+        } else {
+            // --- FAILED LOGIN ---
+            messageDiv.classList.add('error');
+            messageDiv.textContent = result.error || 'Invalid credentials.';
+        }
+    } catch (error) {
+        // --- NETWORK OR OTHER ERRORS ---
         messageDiv.className = 'auth-message error';
-        messageDiv.textContent = 'Please use a valid @cpp.edu email address.';
+        messageDiv.textContent = 'A network error occurred. Please try again.';
+        console.error('Login fetch error:', error);
     }
 }
 
