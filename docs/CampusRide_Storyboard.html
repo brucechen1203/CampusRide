@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CampusRide — User Storyboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Sora:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#faf7f2;--ink:#1a1208;--muted:#7a6e60;
+  --driver:#c8500a;--driver-lt:#fff0e8;
+  --rider:#0a6b8a;--rider-lt:#e6f4f8;
+  --shared:#4a7c3f;--shared-lt:#edf5eb;
+  --line:#d4c9b8;--shadow:rgba(26,18,8,0.12);
+}
+body{background:var(--cream);color:var(--ink);font-family:'Sora',sans-serif;min-height:100vh;overflow-x:hidden;}
+header{background:var(--ink);padding:36px 48px 32px;position:relative;overflow:hidden;}
+header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 18px,rgba(255,255,255,0.025) 18px,rgba(255,255,255,0.025) 19px);}
+.header-inner{position:relative;max-width:1200px;margin:0 auto;}
+.pre-tag{display:inline-block;background:var(--driver);color:#fff;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:3px 12px;border-radius:2px;margin-bottom:12px;}
+h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,48px);color:#fff;line-height:1.1;}
+h1 span{color:var(--driver);}
+.header-meta{color:rgba(255,255,255,0.4);font-size:12px;margin-top:8px;}
+.tabs-wrap{max-width:1200px;margin:0 auto;padding:32px 48px 0;}
+.tabs{display:flex;border-bottom:2px solid var(--line);}
+.tab{padding:10px 28px;font-size:13px;font-weight:500;cursor:pointer;border:none;background:none;color:var(--muted);border-bottom:3px solid transparent;margin-bottom:-2px;transition:.2s;font-family:'Sora',sans-serif;}
+.tab:hover{color:var(--ink);}
+.tab.active.driver-tab{color:var(--driver);border-bottom-color:var(--driver);}
+.tab.active.rider-tab{color:var(--rider);border-bottom-color:var(--rider);}
+.flow-header{max-width:1200px;margin:0 auto;padding:28px 48px 16px;display:flex;align-items:center;gap:16px;}
+.flow-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.flow-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;}
+.flow-desc{font-size:12px;color:var(--muted);margin-top:3px;max-width:520px;line-height:1.5;}
+.board-scroll{overflow-x:auto;padding:8px 48px 40px;scrollbar-width:thin;}
+.board-strip{display:flex;gap:0;width:max-content;align-items:stretch;}
+.frame{width:240px;flex-shrink:0;position:relative;cursor:pointer;}
+.frame:not(:last-child)::after{content:'';position:absolute;top:50%;right:-24px;width:48px;height:2px;background:var(--line);z-index:1;}
+.frame:not(:last-child)::before{content:'▶';position:absolute;top:50%;right:-10px;transform:translateY(-50%);font-size:10px;color:var(--muted);z-index:2;}
+.frame-inner{background:#fff;border:1.5px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 2px 12px var(--shadow);transition:transform .2s,box-shadow .2s,border-color .2s;height:100%;}
+.frame-inner:hover{transform:translateY(-4px);box-shadow:0 8px 32px var(--shadow);}
+.frame.fc-driver .frame-inner:hover{border-color:var(--driver);}
+.frame.fc-rider .frame-inner:hover{border-color:var(--rider);}
+.frame.fc-shared .frame-inner:hover{border-color:var(--shared);}
+.frame-art{height:140px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;}
+.frame.fc-driver .frame-art{background:var(--driver-lt);}
+.frame.fc-rider .frame-art{background:var(--rider-lt);}
+.frame.fc-shared .frame-art{background:var(--shared-lt);}
+.frame-emoji{font-size:44px;line-height:1;}
+.frame-uc{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:2px 8px;border-radius:100px;font-weight:500;}
+.frame.fc-driver .frame-uc{background:var(--driver);color:#fff;}
+.frame.fc-rider .frame-uc{background:var(--rider);color:#fff;}
+.frame.fc-shared .frame-uc{background:var(--shared);color:#fff;}
+.frame-body{padding:16px;}
+.step-num{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin-bottom:6px;}
+.frame-title{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;line-height:1.3;margin-bottom:8px;}
+.frame-story{font-size:11.5px;color:var(--muted);line-height:1.6;margin-bottom:12px;}
+.frame-action{font-size:10.5px;font-weight:600;padding:5px 12px;border-radius:6px;display:inline-block;}
+.frame.fc-driver .frame-action{background:var(--driver-lt);color:var(--driver);}
+.frame.fc-rider .frame-action{background:var(--rider-lt);color:var(--rider);}
+.frame.fc-shared .frame-action{background:var(--shared-lt);color:var(--shared);}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(26,18,8,.6);z-index:100;align-items:center;justify-content:center;padding:24px;backdrop-filter:blur(4px);}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--cream);border-radius:20px;max-width:560px;width:100%;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.3);}
+.modal-art{height:180px;display:flex;align-items:center;justify-content:center;font-size:64px;}
+.modal-body{padding:28px 32px 32px;}
+.modal-uc{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;display:inline-block;padding:3px 10px;border-radius:100px;}
+.modal-title{font-family:'Playfair Display',serif;font-size:24px;font-weight:900;margin-bottom:12px;line-height:1.2;}
+.modal-story{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:20px;}
+.modal-details{display:flex;flex-direction:column;gap:10px;margin-bottom:24px;}
+.detail-row{display:flex;gap:12px;align-items:flex-start;background:#fff;border-radius:10px;padding:10px 14px;border:1px solid var(--line);}
+.detail-icon{font-size:16px;flex-shrink:0;margin-top:1px;}
+.detail-text{font-size:12px;line-height:1.5;}
+.detail-label{font-weight:600;font-size:11px;margin-bottom:2px;}
+.modal-close{width:100%;padding:12px;border:none;border-radius:10px;font-family:'Sora',sans-serif;font-size:13px;font-weight:600;cursor:pointer;background:var(--ink);color:#fff;}
+.legend{max-width:1200px;margin:0 auto;padding:28px 48px 48px;display:flex;flex-wrap:wrap;gap:20px;border-top:1px solid var(--line);}
+.legend-item{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);}
+.legend-dot{width:10px;height:10px;border-radius:50%;}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div class="pre-tag">User Storyboard · CS 4800 Software Engineering</div>
+    <h1>CampusRide<br/><span>User Journey</span> Stories</h1>
+    <p class="header-meta">Cal Poly Pomona · Campus Carpooling Platform · 2026 · Click any frame for full details</p>
+  </div>
+</header>
+
+<div class="tabs-wrap">
+  <div class="tabs">
+    <button class="tab driver-tab active" id="tab-driver" onclick="switchFlow('driver')">🚗 Driver Flow — Maria</button>
+    <button class="tab rider-tab" id="tab-rider" onclick="switchFlow('rider')">🎒 Rider Flow — Alex</button>
+  </div>
+</div>
+
+<div id="flow-driver">
+  <div class="flow-header">
+    <div class="flow-icon" style="background:var(--driver-lt)">🚗</div>
+    <div>
+      <div class="flow-title">Driver Journey — Maria</div>
+      <div class="flow-desc">Maria is a junior who drives daily from Diamond Bar. She wants to reduce gas costs and fill her empty seats. She discovered CampusRide via an ASI flyer at the parking lot.</div>
+    </div>
+  </div>
+  <div class="board-scroll"><div class="board-strip" id="driver-strip"></div></div>
+</div>
+
+<div id="flow-rider" style="display:none">
+  <div class="flow-header">
+    <div class="flow-icon" style="background:var(--rider-lt)">🎒</div>
+    <div>
+      <div class="flow-title">Rider Journey — Alex</div>
+      <div class="flow-desc">Alex is a sophomore without a car, commuting by bus from San Dimas. He wants a faster, cheaper way to campus that fits his MWF class schedule.</div>
+    </div>
+  </div>
+  <div class="board-scroll"><div class="board-strip" id="rider-strip"></div></div>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:var(--driver)"></div>Driver-only step</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--rider)"></div>Rider-only step</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--shared)"></div>Shared interaction (both actors)</div>
+  <div class="legend-item" style="margin-left:auto;font-style:italic;font-size:11px">Click any card for full details</div>
+</div>
+
+<div class="modal-overlay" id="modal-overlay" onclick="bgClose(event)">
+  <div class="modal">
+    <div class="modal-art" id="modal-art"></div>
+    <div class="modal-body">
+      <div class="modal-uc" id="modal-uc"></div>
+      <div class="modal-title" id="modal-title"></div>
+      <div class="modal-story" id="modal-story"></div>
+      <div class="modal-details" id="modal-details"></div>
+      <button class="modal-close" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+var driverFrames=[
+  {color:"driver",emoji:"📱",uc:"UC1",step:"Step 01 · Register",title:"Sign In with Cal Poly SSO",story:"Maria visits CampusRide between classes. She taps Sign In with Cal Poly Pomona, is redirected to the university OAuth 2.0 page, and returns as a fully verified student — no separate password needed.",action:"🔑 Tap Sign In",details:[{icon:"🏫",label:"System Involved",text:"University SSO / OAuth 2.0 — only CPP students can register, automatically creating a trusted closed community."},{icon:"⚡",label:"User Action",text:"Tap Sign In with Cal Poly Pomona → Authenticate via university portal → Return to CampusRide as verified student."},{icon:"🛡️",label:"Trust Layer",text:"Institutional email verification ensures no anonymous users. Profile immediately shows a Verified Student badge."},{icon:"💡",label:"Pain Point Solved",text:"Eliminates sign-up friction — students already have CPP credentials, so onboarding takes under 30 seconds."}]},
+  {color:"driver",emoji:"👤",uc:"UC2",step:"Step 02 · Profile",title:"Build Your Driver Profile",story:"Maria fills in her driver profile: home neighborhood (Diamond Bar), available seats (2), preferred pickup radius (1 mile), and her MWF class schedule. She sets privacy so route details are shown only to matched users.",action:"✏️ Fill Profile",details:[{icon:"📍",label:"Location Input",text:"Home ZIP code or neighborhood — used for route proximity matching, never shared publicly."},{icon:"🗓️",label:"Schedule Template",text:"Maria enters class days and times. The system auto-generates a recurring weekly template."},{icon:"🔒",label:"Privacy Controls",text:"Granular settings: public (name, badge), match-only (route, schedule), private (contact, address)."},{icon:"🚗",label:"Driver Settings",text:"Available seats, smoking preference, music preference — details that improve match compatibility."}]},
+  {color:"driver",emoji:"📢",uc:"UC2",step:"Step 03 · Offer",title:"Post a Carpool Offer",story:"Maria posts her offer: MWF, 7:45 AM departure, 2 seats. She draws her approximate route on the map. The platform calculates her route corridor and makes her visible to compatible riders searching nearby.",action:"📍 Post Offer",details:[{icon:"🗺️",label:"Route Mapping",text:"Google Maps API draws Maria's route and corridor. Riders within 1 mile of the path appear in her match queue."},{icon:"📅",label:"Recurring Offer",text:"Offer re-posts each week based on her schedule template unless she pauses or cancels it."},{icon:"⚙️",label:"Flexibility",text:"Maria can mark individual days unavailable (e.g. midterm week) without deleting her entire offer."},{icon:"🔔",label:"Discovery",text:"Her offer appears immediately in match results for riders from San Dimas, Pomona, and nearby areas."}]},
+  {color:"shared",emoji:"🔔",uc:"UC4",step:"Step 04 · Notification",title:"Receive a Carpool Request",story:"Maria gets a push notification — a rider named Alex (San Dimas) sent a match request. The app shows a 91% route similarity score and Alex's brief intro note. She taps to review his full profile.",action:"👀 Review Request",details:[{icon:"📊",label:"Match Score",text:"91% route similarity computed by comparing GPS corridors and schedule overlap — shown prominently."},{icon:"🏅",label:"Trust Signals",text:"Alex's profile shows: Verified Student badge, MWF schedule overlap with Maria's route, and his intro message."},{icon:"🔔",label:"Notification",text:"Push notification and email alert ensure Maria doesn't miss time-sensitive requests."},{icon:"⚠️",label:"Structured Workflow",text:"Request stays pending for 48 hours. If unanswered, the system notifies Alex and suggests alternative matches."}]},
+  {color:"driver",emoji:"✅",uc:"UC4",step:"Step 05 · Accept",title:"Accept and Confirm the Ride",story:"Maria reviews Alex's profile — schedule, pickup area on the map, and intro note. Satisfied, she taps Accept. Both receive a confirmation email with ride details and a link to the in-app chat. The carpool is now active.",action:"✅ Accept Rider",details:[{icon:"📧",label:"Confirmation Email",text:"Automated email to both with ride summary: days, times, pickup zone, and link to the in-app chat."},{icon:"🔄",label:"Status Update",text:"Maria's dashboard shows 1 Active Carpool. Alex's search results mark this driver as confirmed."},{icon:"🚫",label:"Decline Option",text:"If Maria declines, Alex is notified and the platform surfaces the next best match immediately."},{icon:"📌",label:"Calendar Integration",text:"(Planned) Upcoming rides added to user's calendar app via ICS file in the confirmation email."}]},
+  {color:"shared",emoji:"💬",uc:"UC5",step:"Step 06 · Communicate",title:"Message Your Rider In-App",story:"Maria opens the in-app chat to coordinate the pickup spot. She suggests the Stater Bros. lot on Grand Ave. Alex confirms with a thumbs up. No phone numbers exchanged — everything stays within CampusRide.",action:"💬 Open Chat",details:[{icon:"🔐",label:"Privacy First",text:"In-app messaging means neither party shares personal contact info. Chats are accessible only to the matched pair."},{icon:"📍",label:"Location Sharing",text:"Built-in map pin sharing lets riders drop an exact pickup point without copy-pasting addresses."},{icon:"🔔",label:"Notifications",text:"Push notifications keep coordination flowing even when both parties are in class."},{icon:"📁",label:"Message History",text:"Full conversation history retained for the duration of the arrangement for easy reference."}]},
+  {color:"driver",emoji:"📊",uc:"UC7",step:"Step 07 · Dashboard",title:"Manage Everything from Dashboard",story:"Maria's dashboard is her control center — upcoming rides, Alex's status, a $48 fuel savings estimate, and a CO2 reduction counter. She can pause her offer for Spring Break with one tap and resume when she returns.",action:"📊 View Dashboard",details:[{icon:"📅",label:"Upcoming Rides",text:"Week-at-a-glance view showing confirmed carpools and open seat days available for new riders."},{icon:"💰",label:"Savings Tracker",text:"Estimates monthly gas savings from rider cost-sharing, plus parking cost avoidance."},{icon:"🌱",label:"Emissions Counter",text:"CO2 reduction metric aligns with CPP sustainability goals and rewards eco-friendly commuting."},{icon:"⏸️",label:"Pause & Resume",text:"One-tap pause for vacations or finals week. Riders are automatically notified and prompted to find alternatives."}]},
+  {color:"shared",emoji:"⭐",uc:"UC8",step:"Step 08 · Rate",title:"Rate Your Rider After the Ride",story:"Friday evening, Maria gets a prompt: How was your ride with Alex? She gives 5 stars and selects Reliable, on time. Alex earns a Reliable Rider badge that boosts his visibility in future searches.",action:"⭐ Leave Rating",details:[{icon:"⭐",label:"Mutual Rating",text:"Both driver and rider rate each other simultaneously — neither sees the other's score first, preventing bias."},{icon:"🏅",label:"Badge System",text:"Consistent high ratings unlock badges: Reliable Rider, Verified Driver, Community Builder."},{icon:"🛡️",label:"Trust Building",text:"The rating layer is the platform's core accountability mechanism."},{icon:"📈",label:"Match Priority",text:"Highly-rated users rank higher in future match results, rewarding reliable behavior with better visibility."}]}
+];
+
+var riderFrames=[
+  {color:"rider",emoji:"📱",uc:"UC1",step:"Step 01 · Register",title:"Sign In with Cal Poly SSO",story:"Alex discovers CampusRide via Reddit. He taps Sign In with Cal Poly Pomona, authenticates with his student email, and lands on profile setup — verified in under 60 seconds.",action:"🔑 Tap Sign In",details:[{icon:"🏫",label:"System Involved",text:"University SSO / OAuth 2.0 — Alex's CPP credentials are the only credentials he ever needs."},{icon:"⚡",label:"User Action",text:"Open CampusRide → Tap Sign In with CPP → Authenticate → Land on profile setup. Under 60 seconds."},{icon:"🛡️",label:"Community Trust",text:"Because everyone uses a CPP email, Alex knows every person on the platform is a verified student."},{icon:"📲",label:"Discovery Channel",text:"Alex found the app via Reddit — reflecting the platform's organic community engagement strategy."}]},
+  {color:"rider",emoji:"👤",uc:"UC2",step:"Step 02 · Profile",title:"Set Up Your Rider Profile",story:"Alex selects Rider, enters his ZIP (91773 — San Dimas), and adds his MWF class schedule. He sets privacy to Matches Only and writes a short bio: Friendly, punctual, CS sophomore.",action:"✏️ Fill Profile",details:[{icon:"📍",label:"Location Privacy",text:"Alex shares ZIP-level home location only — never his street address. Exact pickup is set after a match is confirmed."},{icon:"🗓️",label:"Schedule Input",text:"He inputs MWF class times. The system identifies his earliest class (8:00 AM) and recommends 7:30 AM carpool windows."},{icon:"👤",label:"Profile Bio",text:"Short optional bio lets Alex introduce himself before a match — reducing social friction for first contact."},{icon:"🔄",label:"Role Flexibility",text:"Alex can switch to Driver in the future if he gets a car. The platform supports dual-role profiles."}]},
+  {color:"rider",emoji:"🗺️",uc:"UC3",step:"Step 03 · Search",title:"Search for Carpool Matches",story:"Alex taps Find a Carpool. The matching algorithm cross-references driver offers using Google Maps route similarity. A ranked list appears — Maria tops it with a 91% match score and 4.9-star rating.",action:"🔍 Search Matches",details:[{icon:"🗺️",label:"Maps API",text:"Google Maps API computes route similarity between Alex's commute path and each driver's posted route corridor."},{icon:"📊",label:"Match Scoring",text:"Score combines route overlap (60%), schedule alignment (30%), and historical reliability (10%)."},{icon:"🔍",label:"Smart Filtering",text:"Alex can filter by departure window, gender preference, smoking/no-smoking, and available days."},{icon:"⚡",label:"Real-Time Results",text:"Results update as new drivers register. Alex sees a 3 new matches this week badge on returning visits."}]},
+  {color:"rider",emoji:"📋",uc:"UC3",step:"Step 04 · Evaluate",title:"Review Driver Profile and Match Score",story:"Alex taps Maria's listing. He sees her route on a map, 4.9-star rating, Verified Driver badge, her MWF 7:45 AM schedule, and pickup zone. He can see exactly how the route overlaps with his commute.",action:"👁️ View Profile",details:[{icon:"🗺️",label:"Route Visualization",text:"Maria's route drawn on an interactive map — Alex can see exactly where she drives relative to his home area."},{icon:"⭐",label:"Rating Display",text:"Star rating, total rides, and badge count shown prominently. New users show New to CampusRide to set expectations."},{icon:"📅",label:"Schedule Preview",text:"Maria's driving days and departure time shown in a clean calendar view — Alex instantly sees the MWF overlap."},{icon:"🔒",label:"Privacy Maintained",text:"Alex sees Maria's first name and neighborhood only. Full details unlock only after mutual acceptance."}]},
+  {color:"shared",emoji:"📨",uc:"UC4",step:"Step 05 · Request",title:"Send a Carpool Request",story:"Alex taps Request Carpool and types: Hi Maria, I live near Grand Ave in San Dimas. My 8 AM class is in Building 3. Happy to meet wherever works! He hits Send — Maria gets a push notification with his profile.",action:"📨 Send Request",details:[{icon:"📝",label:"Request Note",text:"Optional short message lets Alex personalize his request — much warmer than a faceless system notification."},{icon:"🔔",label:"Notification to Driver",text:"Maria receives push notification and email with Alex's profile summary, match score, and message preview."},{icon:"⏳",label:"Pending Status",text:"Alex's dashboard shows the request as Pending with a 48-hour countdown before it expires."},{icon:"🔄",label:"Multi-Request Option",text:"Alex can send up to 3 simultaneous requests, accepting the first driver who responds."}]},
+  {color:"shared",emoji:"💬",uc:"UC5",step:"Step 06 · Connect",title:"Chat with Your Driver In-App",story:"Maria accepts and the chat unlocks. Alex drops a map pin at Stater Bros. on Grand Ave as his pickup spot. They agree on a 7:45 AM meetup — all coordinated inside CampusRide without sharing phone numbers.",action:"💬 Open Chat",details:[{icon:"📍",label:"Map Pin Sharing",text:"Alex drops a precise GPS pin for his pickup spot — no awkward address copy-paste between apps."},{icon:"🔐",label:"Privacy Protected",text:"Chat is between matched users only. Alex's phone number is never shared with the driver."},{icon:"📱",label:"Cross-Platform",text:"Chat accessible on web and mobile. Alex gets push notifications so he never misses Maria's replies."},{icon:"🗂️",label:"History Preserved",text:"Conversation history stays available for the life of the arrangement — no need to remember what was agreed."}]},
+  {color:"rider",emoji:"📊",uc:"UC7",step:"Step 07 · Dashboard",title:"Track Your Rides and Savings",story:"Alex's dashboard shows this week's confirmed carpool days (MWF with Maria), a $62 savings estimate vs. Uber, and a 3 rides completed counter. He can cancel any day with one tap and Maria is auto-notified.",action:"📊 View Dashboard",details:[{icon:"📅",label:"Ride Calendar",text:"Week view shows confirmed, pending, and available ride days — color-coded by status for instant readability."},{icon:"💰",label:"Cost Savings",text:"Real-time estimate comparing carpool cost-share to equivalent Uber/Lyft rides. Alex saves ~$62 this month."},{icon:"🔄",label:"Cancellation Flow",text:"One-tap ride cancel with automated notification to Maria. Repeated last-minute cancellations impact reliability score."},{icon:"📈",label:"Ride History",text:"Full log of past rides, ratings given/received, and badges earned."}]},
+  {color:"shared",emoji:"⭐",uc:"UC8",step:"Step 08 · Rate",title:"Rate Your Driver",story:"Friday evening, Alex gets a prompt: How was your ride with Maria? He selects 5 stars and tags Great driver, always on time. Maria earns her Verified Driver badge and rises in future rider search results.",action:"⭐ Leave Rating",details:[{icon:"⭐",label:"Star Rating",text:"1–5 star scale with preset tags: Friendly, On time, Safe driver — low-friction feedback."},{icon:"🏅",label:"Badges",text:"After 5 five-star ratings, Maria earns Verified Driver. Alex earns Reliable Rider after consistent on-time records."},{icon:"🤝",label:"Mutual Accountability",text:"Both parties know they will rate each other, encouraging courteous and punctual behavior."},{icon:"🔒",label:"Blind Rating",text:"Ratings submitted blind — neither sees the other's score until both have submitted, preventing retaliation."}]}
+];
+
+var colorMap={driver:"var(--driver)",rider:"var(--rider)",shared:"var(--shared)"};
+var bgMap={driver:"var(--driver-lt)",rider:"var(--rider-lt)",shared:"var(--shared-lt)"};
+
+function buildStrip(frames,id){
+  var c=document.getElementById(id);
+  c.innerHTML="";
+  frames.forEach(function(f){
+    var el=document.createElement("div");
+    el.className="frame fc-"+f.color;
+    el.innerHTML='<div class="frame-inner"><div class="frame-art"><div class="frame-emoji">'+f.emoji+'</div><div class="frame-uc">'+f.uc+'</div></div><div class="frame-body"><div class="step-num">'+f.step+'</div><div class="frame-title">'+f.title+'</div><div class="frame-story">'+f.story+'</div><div class="frame-action">'+f.action+'</div></div></div>';
+    el.onclick=(function(frame){return function(){openModal(frame);};})(f);
+    c.appendChild(el);
+  });
+}
+
+function openModal(f){
+  var c=colorMap[f.color],bg=bgMap[f.color];
+  document.getElementById("modal-art").style.background=bg;
+  document.getElementById("modal-art").innerHTML='<span>'+f.emoji+'</span>';
+  document.getElementById("modal-uc").textContent=f.uc+" — "+f.step;
+  document.getElementById("modal-uc").style.background=bg;
+  document.getElementById("modal-uc").style.color=c;
+  document.getElementById("modal-title").textContent=f.title;
+  document.getElementById("modal-story").textContent=f.story;
+  document.getElementById("modal-details").innerHTML=f.details.map(function(d){
+    return '<div class="detail-row"><div class="detail-icon">'+d.icon+'</div><div class="detail-text"><div class="detail-label" style="color:'+c+'">'+d.label+'</div>'+d.text+'</div></div>';
+  }).join("");
+  document.getElementById("modal-overlay").classList.add("open");
+}
+function closeModal(){document.getElementById("modal-overlay").classList.remove("open");}
+function bgClose(e){if(e.target===document.getElementById("modal-overlay"))closeModal();}
+function switchFlow(flow){
+  document.getElementById("flow-driver").style.display=flow==="driver"?"":"none";
+  document.getElementById("flow-rider").style.display=flow==="rider"?"":"none";
+  document.getElementById("tab-driver").className="tab driver-tab"+(flow==="driver"?" active":"");
+  document.getElementById("tab-rider").className="tab rider-tab"+(flow==="rider"?" active":"");
+}
+buildStrip(driverFrames,"driver-strip");
+buildStrip(riderFrames,"rider-strip");
+</script>
+</body>
+</html>
